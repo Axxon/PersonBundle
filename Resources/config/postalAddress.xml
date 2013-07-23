@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <service id="black_person.postaladdress.form.type" class="%black_person.postaladdress.form.type%" scope="request">
+            <argument>%black_person.postaladdress.model.class%</argument>
+            <argument type="service" id="black_person.postaladdress.form.address_list" />
+            <tag name="form.type" alias="black_person_postaladdress" />
+        </service>
+
+        <service id="black_person.postaladdress.form.address_list" class="%black_person.postaladdress.form.address_list%" scope="request" public="false">
+            <argument type="service" id="request" />
+        </service>
+    </services>
+</container>

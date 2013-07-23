@@ -1,0 +1,21 @@
+{% extends 'BlackPersonBundle:AdminPerson:base.html.twig' %}
+{% block sidebar_person %}
+    {% include 'BlackPersonBundle:AdminPerson:sidebar.html.twig' %}
+{% endblock %}
+{% block page_content %}
+{% spaceless %}
+    <form id="validate" class="main grid9" action="{{ path('admin_person_batch') }}" method="post">
+        <div class="fluid">
+            <div class="widget check">
+                <div class="whead">
+                    <span class="titleIcon"><input type="checkbox" id="titleCheck" name="titleCheck" /></span>
+                    <h6>{% trans from "views" %}person.admin.index.person.text{% endtrans %}</h6>
+                    <div class="clear"></div>
+                </div>
+
+                {% include 'BlackPersonBundle:AdminPerson:table.html.twig' with {'keys': keys, 'csrf': csrf} %}
+            </div>
+        </div>
+    </form>
+{% endspaceless %}
+{% endblock %}

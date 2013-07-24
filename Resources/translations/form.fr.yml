@@ -1,0 +1,184 @@
+person:
+  admin:
+    contactPoint:
+      type:
+        text: Type d'adresse
+        empty: Choisir une type d'adresse
+      email:
+        text: Adresse mail
+      phone:
+        text: Téléphone
+      mobile:
+        text: Mobile
+      fax:
+        text: Fax
+    
+    honorificList:
+      mr:
+        text: Monsieur
+      miss:
+        text: Mademoiselle
+      mrs:
+        text: Madame
+      pr:
+        text: Professeur
+      dr:
+        text: Docteur
+    
+    genderList:
+      female:
+        text: Femme
+      male:
+        text: Homme
+        
+    general:
+      update:
+        submit:
+          value: Mettre à jour
+          
+    mail:
+      update:
+        submit:
+          value: Mettre à jour
+          
+    person:
+      address:
+        text: Adresses postales
+      birthdate:
+        text: Date de naisance
+        day:
+          empty: Jour
+        month:
+          empty: Mois
+        year:
+          empty: Année
+      children:
+        text: Enfant(s)
+      colleagues:
+        text: Collègue(s)
+      contact:
+        text: Points de contact
+      description:
+        text: Biographie
+        placeholder: Une petite biographie?
+      email:
+        text: Adresse mail
+      gender:
+        text: Sexe
+        empty: Choisir une valeur
+      honorificPrefix:
+        text: Dénomination
+        empty: Choisir une valeur
+        choice:
+          mr:
+            text:  Monsieur
+          miss:
+            text:  Mademoisselle
+          mrs:
+            text:  Madame
+          pr:
+            text:  Professeur
+          dr:
+            text:  Docteur
+      image:
+        text: Image
+      job:
+        text: Profession
+      name:
+        additional:
+          text: Pseudonyme
+        family:
+          text: Nom de famille
+        given:
+          text: Prénom
+      parent:
+        text: Parent(s)
+      seeks:
+        text: Recherche(s)
+      siblings:
+        text: Affiliation(s)
+      url:
+        text: Site internet
+      works:
+        text: Société
+    
+    postalAddress:
+      type:
+        text: Type d'adresse
+        empty: Choisir une type d'adresse
+        choice:
+          principal: Principal
+          home: Domicile
+          work: Travail
+          other: Autre
+      name:
+        text: Nom
+      description:
+        text: Description
+      address:
+        street:
+          text: Rue
+        complementary:
+          text: Complément
+        postal:
+          text: Code postal
+        box:
+          text: Boite postal
+        locality:
+          text: Ville
+        region:
+          text: Région
+        country:
+          text: Pays
+          empty: Choisir un pays
+    
+    setPersonData:
+      spouse:
+        text: Époux(se)
+        empty: Est marié à?
+     
+    sidebar:
+      mail:
+        submit:
+          value: Envoyer
+    
+    tfoot:
+      select:
+        text: Exécuter une action
+        option:
+          choose: Choisir une action
+          delete: Supprimer
+      submit:
+        value: Envoyer
+        
+  www:
+    person:
+      birthdate:
+        text: Date de naisance
+        day:
+          empty: Jour
+        month:
+          empty: Mois
+        year:
+          empty: Année
+      description:
+        text: Biographie
+        placeholder: Parler-nous un peu de vous ;)
+      email:
+        text: Adresse mail
+      gender:
+        text: Sexe
+        choice: Choisir une valeur
+      image:
+        text: Image
+      name:
+        family:
+          text: Nom de famille
+        given:
+          text: Prénom
+      url:
+        text: Site internet
+        
+    me:
+      submit:
+        value: Envoyer

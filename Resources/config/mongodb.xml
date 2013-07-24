@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="black_person.manager.person">%black_person.person.manager%</parameter>
+    </parameters>
+
+    <services>
+        <service id="black_person.document.manager" alias="doctrine.odm.mongodb.document_manager" />
+
+        <service id="black_person.manager.person" class="%black_person.manager.person%">
+            <argument type="service" id="black_person.document.manager" />
+            <argument>%black_person.person.model.class%</argument>
+        </service>
+    </services>
+</container>

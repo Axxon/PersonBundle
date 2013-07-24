@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="black_person.person.form.front" factory-method="createNamed" factory-service="form.factory" class="Symfony\Component\Form\Form" scope="request">
+            <argument>%black_person.person.form.front_name%</argument>
+            <argument type="service" id="black_person.person.form.front_type" />
+            <argument>null</argument>
+        </service>
+
+        <service id="black_person.person.form.front_type" class="%black_person.person.form.front_type%" scope="request">
+            <argument>%black_person.person.model.class%</argument>
+            <argument type="service" id="black_person.postaladdress.form.type" />
+            <argument type="service" id="black_person.contactpoint.form.type" />
+            <argument type="service" id="black_person.person.form.gender_list" />
+            <tag name="form.type" alias="black_person_front_person" />
+        </service>
+
+        <service id="black_person.person.form.front_handler" class="%black_person.person.form.front_handler%" scope="request" public="true">
+            <argument type="service" id="black_person.person.form.front" />
+            <argument type="service" id="request" />
+            <argument type="service" id="session" />
+        </service>
+    </services>
+</container>

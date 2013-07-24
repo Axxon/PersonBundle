@@ -1,0 +1,41 @@
+{#  Breadcrumbs line  #}
+<div class="breadLine">
+    <div class="bc">
+        <ul id="breadcrumbs" class="breadcrumbs">
+            <li>
+                <a href="{{ url('admin_index') }}" title="{% trans from "views" %}admin.admin.breadLine.dashboard.a.title{% endtrans %}">
+                    {% trans from "views" %}admin.admin.breadLine.dashboard.a.text{% endtrans %}
+                </a>
+            </li>
+            <li class="current">
+                <a href="{{ url(a_route) }}" title="{{ a_title|trans({}, "views") }}">
+                    {{ a_text|trans({}, "views") }}
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="breadLinks">
+        <ul>
+            <li class="has">
+                <a title="">
+                    <i class="icos-money3"></i>
+                    <span>{% trans from "views" %}person.admin.breadLine.shortcut.text{% endtrans %}</span>
+                    <span><img src="/bundles/blackadmin/images/elements/control/hasddArrow.png" alt="" /></span>
+                </a>
+                <ul>
+                {% if shortcuts is defined %}
+                    {% for shortcut in shortcuts %}
+                        <li><a href="{{ path(shortcut.route) }}" title=""><span class="icos-add"></span>{{ shortcut.text|trans({}, "views") }}</a></li>
+                    {% endfor %}
+                {% else %}
+                    {% if route is defined %}
+                        <li><a href="{{ path(route) }}" title=""><span class="icos-add"></span>{{ text|trans({}, "views") }}</a></li>
+                    {% endif %}
+                {% endif %}
+                </ul>
+            </li>
+        </ul>
+        <div class="clear"></div>
+    </div>
+</div>

@@ -1,0 +1,86 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+
+    {% include 'BlackUserBundle:Front:header.html.twig' %}
+
+    {# Start Intro Block #}
+    <section class="intro container">
+        <div class="row">
+            <div class="span12">
+                <br><br>
+                <p>{% trans with { '%name%': person.name } from "views" %}person.www.me.profile.hello{% endtrans %}</p>
+            </div>
+        </div>
+    </section>
+    {# End Intro Block #}
+
+    {#  Start Services Icons  #}
+    <section id="services" class="container">
+        <div class="row">
+            <div class="span12">
+                <form id="profile" action="{{ path("profile_me") }}" method="post" {{ form_enctype(form) }}>
+
+                    {% if error is defined %}
+                        <div class="alert alert-error">{{ error.message|trans() }}</div>
+                    {% endif %}
+
+
+                        <h4>{% trans from "views" %}person.www.me.profile.text{% endtrans %}</h4>
+                        {{ form_row(form.gender) }}
+
+                        <div class="row">
+                            <div class="span3">
+                                {{ form_row(form.givenName) }}
+                            </div>
+
+                            <div class="span3">
+                                {{ form_row(form.familyName) }}
+                            </div>
+                        </div>
+
+                        {{ form_row(form.birthdate) }}
+                        {{ form_row(form.image) }}
+
+                        {% if person.path %}
+                        <img src="/uploads/profile/{{ person.path }}" alt="{% trans from "views" %}person.www.me.avatar.img.alt{% endtrans %}" />
+                        {% endif %}
+
+                        <hr>
+
+                        <h4>{% trans from "views" %}person.www.me.contact.text{% endtrans %}</h4>
+                        <div class="row">
+                            <div class="span3">
+                                {{ form_row(form.email) }}
+                            </div>
+
+                            <div class="span3">
+                                {{ form_row(form.url) }}
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <h4>{% trans from "views" %}person.www.me.background.text{% endtrans %}</h4>
+                        {{ form_row(form.background) }}
+
+                        {% if person.pathBackground %}
+                        <img src="/uploads/profile/{{ person.pathBackground }}" alt="{% trans from "views" %}person.www.me.background.img.alt{% endtrans %}" width="330px" />
+                        {% endif %}
+
+                        {{ form_row(form.description) }}
+
+                        {{ form_rest(form) }}
+
+                        <div class="logControl offset4">
+                            <input type="submit" name="_submit" value="{% trans from "form" %}person.www.me.submit.value{% endtrans %}" class="btn rounded span3" />
+                        </div>
+
+                </form>
+            </div>
+        </div>
+    </section>
+    {#  End Services Icons  #}
+
+    {% include 'BlackUserBundle:Front:footer.html.twig' %}
+{% endblock %}

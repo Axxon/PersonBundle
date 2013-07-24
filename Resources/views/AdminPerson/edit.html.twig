@@ -1,0 +1,17 @@
+{% extends 'BlackPersonBundle:AdminPerson:base.html.twig' %}
+{% block content_top %}
+    {% include 'BlackAdminBundle:Admin:contentTop.html.twig' with {'title': "person.admin.contentTop.person.edit.text"} %}
+{% endblock %}
+{% block sidebar_person %}
+    {% include 'BlackPersonBundle:AdminPerson:sidebar.html.twig' with {'document': document} %}
+{% endblock %}
+{% block page_content %}
+    <div class="fluid">
+        <form id="validate" class="main grid9" action="{{ path('admin_person_edit', { 'id': document.id }) }}" method="post" {{ form_enctype(form) }}>
+            {% include 'BlackAdminBundle:AdminForm:fieldset.html.twig' with {'form': form, 'title': "person.admin.fieldset.person.edit.text"} %}
+        </form>
+        {% include 'BlackAdminBundle:AdminForm:actions.html.twig' with {'document': document} %}
+    </div>
+    {% include 'BlackPersonBundle:AdminPerson:js.html.twig' with {'form': form} %}
+
+{% endblock %}

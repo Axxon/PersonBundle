@@ -1,0 +1,16 @@
+<tfoot>
+    <tr>
+        <td colspan="6">
+            <div class="itemActions">
+                <label>{% trans from "form" %}person.admin.tfoot.select.text{% endtrans %}</label>
+                <select name="batchAction" style="opacity: 0;">
+                    <option value="">{% trans from "form" %}person.admin.tfoot.select.option.choose{% endtrans %}</option>
+                    <option value="delete">{% trans from "form" %}person.admin.tfoot.select.option.delete{% endtrans %}</option>
+                </select>
+                <input type="hidden" name="token" value="{{ csrf.generateCsrfToken('batch') }}" />
+                <input type="submit" class="buttonS bGreen" value="{% trans from "form" %}person.admin.tfoot.submit.value{% endtrans %}" />
+            </div>
+
+        </td>
+    </tr>
+</tfoot>

@@ -35,48 +35,16 @@ class PersonType extends AbstractType
     protected $class;
 
     /**
-     * @var
-     */
-    protected $postalType;
-
-    /**
-     * @var
-     */
-    protected $contactType;
-
-    /**
-     * @var \Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceListInterface
-     */
-    protected $gender;
-
-    /**
-     * @var \Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceListInterface
-     */
-    protected $honorific;
-
-    /**
-     * @param string                                                                $dbDriver
-     * @param string                                                                $class
-     * @param \Black\Bundle\PersonBundle\Form\Type\PostalAddressType                $postal
-     * @param \Black\Bundle\PersonBundle\Form\Type\ContactPointType                 $contact
-     * @param \Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceListInterface $gender
-     * @param \Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceListInterface $honorific
+     * @param string $dbDriver
+     * @param string $class
      */
     public function __construct(
         $dbDriver,
-        $class,
-        PostalAddressType $postal,
-        ContactPointType $contact,
-        ChoiceListInterface $gender,
-        ChoiceListInterface $honorific
+        $class
     )
     {
         $this->dbDriver     = $dbDriver;
         $this->class        = $class;
-        $this->postalType   = $postal;
-        $this->contactType  = $contact;
-        $this->gender       = $gender;
-        $this->honorific    = $honorific;
     }
 
     /**
@@ -91,21 +59,19 @@ class PersonType extends AbstractType
         $builder
             ->add(
                 'gender',
-                'choice',
+                'black_person_choice_list_gender',
                 array(
                     'label'         => 'person.admin.person.gender.text',
-                    'empty_value'   => 'person.admin.person.gender.empty',
-                    'choice_list'   => $this->gender
+                    'empty_value'   => 'person.admin.person.gender.empty'
                 )
             )
             ->add(
                 'honorificPrefix',
-                'choice',
+                'black_person_choice_list_honorific_prefix',
                 array(
                     'label'         => 'person.admin.person.honorificPrefix.text',
                     'required'      => false,
-                    'empty_value'   => 'person.admin.person.honorificPrefix.empty',
-                    'choice_list'   => $this->honorific
+                    'empty_value'   => 'person.admin.person.honorificPrefix.empty'
                 )
             )
             ->add(
@@ -174,7 +140,7 @@ class PersonType extends AbstractType
                 'contactPoints',
                 'collection',
                 array(
-                    'type'          => $this->contactType,
+                    'type'          => 'black_person_contactpoint',
                     'label'         => 'person.admin.person.contact.text',
                     'allow_add'     => true,
                     'allow_delete'  => true,
@@ -190,7 +156,7 @@ class PersonType extends AbstractType
                 'address',
                 'collection',
                 array(
-                    'type'          => $this->postalType,
+                    'type'          => 'black_person_postaladdress',
                     'label'         => 'person.admin.person.address.text',
                     'allow_add'     => true,
                     'allow_delete'  => true,

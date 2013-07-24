@@ -131,7 +131,7 @@ class Configuration implements ConfigurationInterface
                             ->addDefaultsIfNotSet()
                             ->children()
                                 ->scalarNode('type')->defaultValue(
-                                    'Black\\Bundle\\CommonBundle\\Form\\Type\\PostalAddressType'
+                                    'Black\\Bundle\\PersonBundle\\Form\\Type\\PostalAddressType'
                                 )->end()
                                 ->scalarNode('address_list')->defaultValue(
                                     'Black\\Bundle\\CommonBundle\\Form\\ChoiceList\\AddressList'

@@ -14,10 +14,6 @@
         <service id="black_person.person.form.type" class="%black_person.person.form.type%" scope="request">
             <argument>%black_person.db_driver%</argument>
             <argument>%black_person.person.model.class%</argument>
-            <argument type="service" id="black_person.postaladdress.form.type" />
-            <argument type="service" id="black_person.contactpoint.form.type" />
-            <argument type="service" id="black_person.person.form.gender_list" />
-            <argument type="service" id="black_person.person.form.honorific_prefix_list" />
             <tag name="form.type" alias="black_person_person" />
         </service>
 
@@ -30,7 +26,19 @@
         <service id="black_person.person.model.class" class="%black_person.person.model.class%" public="true" />
 
         <service id="black_person.person.form.gender_list" class="%black_person.person.form.gender_list%" public="false" />
+        
+        <service id="black_person.person.form.gender_type" class="Black\Bundle\CommonBundle\Form\Type\CustomChoiceListType" public="true">
+            <argument type="service" id="black_person.person.form.gender_list" />
+            <argument>black_person_choice_list_gender</argument>
+            <tag name="form.type" alias="black_person_choice_list_gender" />
+        </service>
 
         <service id="black_person.person.form.honorific_prefix_list" class="%black_person.person.form.honorific_prefix_list%" public="false" />
+        
+        <service id="black_person.person.form.honorific_prefix_type" class="Black\Bundle\CommonBundle\Form\Type\CustomChoiceListType" public="true">
+            <argument type="service" id="black_person.person.form.honorific_prefix_list" />
+            <argument>black_person_choice_list_honorific_prefix</argument>
+            <tag name="form.type" alias="black_person_choice_list_honorific_prefix" />
+        </service>
     </services>
 </container>

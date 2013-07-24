@@ -10,10 +10,6 @@
  */
 namespace Black\Bundle\PersonBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Component\Validator\Constraints as Assert;
-use Black\Bundle\CommonBundle\Traits\ContactPointEntityTrait;
 use Black\Bundle\CommonBundle\Entity\PostalAddress as AbstractPostalAddress;
 
 /**

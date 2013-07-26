@@ -28,37 +28,11 @@ class FrontPersonType extends AbstractType
     private $class;
 
     /**
-     * @var
-     */
-    private $postalType;
-
-    /**
-     * @var
-     */
-    private $contactType;
-
-    /**
-     * @var \Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceListInterface
-     */
-    private $gender;
-
-    /**
      * @param string              $class
-     * @param PostalAddressType   $postal
-     * @param ContactPointType    $contact
-     * @param ChoiceListInterface $gender
      */
-    public function __construct(
-        $class,
-        PostalAddressType $postal,
-        ContactPointType $contact,
-        ChoiceListInterface $gender
-    )
+    public function __construct($class)
     {
         $this->class        = $class;
-        $this->postalType   = $postal;
-        $this->contactType  = $contact;
-        $this->gender       = $gender;
     }
 
     /**
@@ -70,11 +44,10 @@ class FrontPersonType extends AbstractType
         $builder
             ->add(
                 'gender',
-                'choice',
+                'black_person_choice_list_gender',
                 array(
                     'label'         => 'person.www.person.gender.text',
-                    'empty_value'   => 'person.www.person.gender.choice',
-                    'choice_list'   => $this->gender
+                    'empty_value'   => 'person.www.person.gender.choice'
                 )
             )
 

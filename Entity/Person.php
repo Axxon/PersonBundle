@@ -16,6 +16,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Black\Bundle\PersonBundle\Model\AbstractPerson;
+use Black\Bundle\PersonBundle\Model\PersonInterface;
 use Black\Bundle\CommonBundle\Traits\ThingEntityTrait;
 
 /**

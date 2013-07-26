@@ -72,6 +72,9 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('type')->defaultValue(
                                     'Black\\Bundle\\PersonBundle\\Form\\Type\\PersonType'
                                 )->end()
+                                ->scalarNode('person_list')->defaultValue(
+                                    'Black\\Bundle\\PersonBundle\\Form\\ChoiceList\\PersonList'
+                                )->end()
                                 ->scalarNode('handler')->defaultValue(
                                     'Black\\Bundle\\PersonBundle\\Form\\Handler\\PersonFormHandler'
                                 )->end()

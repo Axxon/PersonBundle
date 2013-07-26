@@ -3,7 +3,7 @@
 <container xmlns="http://symfony.com/schema/dic/services"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-
+    
     <services>
         <service id="black_person.person.form" factory-method="createNamed" factory-service="form.factory" class="Symfony\Component\Form\Form" scope="request">
             <argument>%black_person.person.form.name%</argument>
@@ -14,6 +14,9 @@
         <service id="black_person.person.form.type" class="%black_person.person.form.type%" scope="request">
             <argument>%black_person.db_driver%</argument>
             <argument>%black_person.person.model.class%</argument>
+            <call method="setManager">
+                <argument type="service" id="black_person.manager.person" />
+            </call>
             <tag name="form.type" alias="black_person_person" />
         </service>
 
@@ -25,6 +28,7 @@
         
         <service id="black_person.person.model.class" class="%black_person.person.model.class%" public="true" />
 
+        
         <service id="black_person.person.form.gender_list" class="%black_person.person.form.gender_list%" public="false" />
         
         <service id="black_person.person.form.gender_type" class="Black\Bundle\CommonBundle\Form\Type\CustomChoiceListType" public="true">
@@ -33,12 +37,24 @@
             <tag name="form.type" alias="black_person_choice_list_gender" />
         </service>
 
+
         <service id="black_person.person.form.honorific_prefix_list" class="%black_person.person.form.honorific_prefix_list%" public="false" />
         
         <service id="black_person.person.form.honorific_prefix_type" class="Black\Bundle\CommonBundle\Form\Type\CustomChoiceListType" public="true">
             <argument type="service" id="black_person.person.form.honorific_prefix_list" />
             <argument>black_person_choice_list_honorific_prefix</argument>
             <tag name="form.type" alias="black_person_choice_list_honorific_prefix" />
+        </service>
+
+
+        <service id="black_person.person.form.person_list" class="%black_person.person.form.person_list%" public="false" >
+            <argument type="service" id="black_person.manager.person" />
+        </service>
+        
+        <service id="black_person.person.form.person_type" class="Black\Bundle\CommonBundle\Form\Type\CustomChoiceListType" public="true">
+            <argument type="service" id="black_person.person.form.person_list" />
+            <argument>black_person_choice_list_person</argument>
+            <tag name="form.type" alias="black_person_choice_list_person" />
         </service>
     </services>
 </container>

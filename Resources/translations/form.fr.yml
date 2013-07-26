@@ -54,6 +54,9 @@ person:
           empty: Année
       children:
         text: Enfant(s)
+      choice:
+        other:
+          text: Autre
       colleagues:
         text: Collègue(s)
       contact:

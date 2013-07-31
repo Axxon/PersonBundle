@@ -589,7 +589,6 @@ abstract class AbstractPerson implements PersonInterface
         }
 
         $this->getSiblings()->removeElement($person);
-
     }
 
     /**
@@ -642,6 +641,16 @@ abstract class AbstractPerson implements PersonInterface
         return $this->worksFor;
     }
 
+    /**
+     * @return PostalAddress
+     */
+    public function getFirstFormattedAddress()
+    {
+        if ($this->getAddress()->first()) {
+            return $this->getAddress()->first()->getAddress();
+        }
+    }
+    
     /**
      *
      */

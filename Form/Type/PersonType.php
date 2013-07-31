@@ -11,11 +11,10 @@
 namespace Black\Bundle\PersonBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceListInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Black\Bundle\CommonBundle\Form\Transformer\ValuetoModelsOrNullTransformer;
 use Black\Bundle\PersonBundle\Form\EventListener\SetPersonDataSubscriber;
-use Black\Bundle\CommonBundle\Form\Type\PostalAddressType;
 
 /**
  * Class PersonType
@@ -35,6 +34,11 @@ class PersonType extends AbstractType
     protected $class;
 
     /**
+     * @var ObjectManager
+     */
+    protected $manager;
+
+    /**
      * @param string $dbDriver
      * @param string $class
      */
@@ -45,6 +49,14 @@ class PersonType extends AbstractType
     {
         $this->dbDriver     = $dbDriver;
         $this->class        = $class;
+    }
+
+    /**
+     * @param ObjectManager $manager
+     */
+    public function setManager($manager)
+    {
+        $this->manager = $manager;
     }
 
     /**
@@ -151,7 +163,6 @@ class PersonType extends AbstractType
                     ),
                 )
             )
-
             ->add(
                 'address',
                 'collection',
@@ -167,7 +178,6 @@ class PersonType extends AbstractType
                     ),
                 )
             )
-
             ->add(
                 'jobTitle',
                 'text',
@@ -183,120 +193,82 @@ class PersonType extends AbstractType
                     'label'         => 'person.admin.person.works.text',
                     'required'      => false
                 )
+            )->add(
+                $builder->create(
+                    'children',
+                    'black_person_choice_list_person',
+                    array(
+                        'label'         => 'person.admin.person.children.text',
+                        'multiple'      => true,
+                        'by_reference'  => false,
+                        'required'      => false
+                    )
+                )
+                ->addModelTransformer(
+                    new ValuetoModelsOrNullTransformer($this->manager)
+                )
+            )
+            ->add(
+                $builder->create(
+                    'parents',
+                    'black_person_choice_list_person',
+                    array(
+                        'label'         => 'person.admin.person.parent.text',
+                        'multiple'      => true,
+                        'by_reference'  => false,
+                        'required'      => false
+                    )
+                )
+                ->addModelTransformer(
+                    new ValuetoModelsOrNullTransformer($this->manager)
+                )
+            )
+            ->add(
+                $builder->create(
+                    'colleagues',
+                    'black_person_choice_list_person',
+                    array(
+                        'label'         => 'person.admin.person.colleagues.text',
+                        'multiple'      => true,
+                        'by_reference'  => false,
+                        'required'      => false
+                    )
+                )
+                ->addModelTransformer(
+                    new ValuetoModelsOrNullTransformer($this->manager)
+                )
+            )
+            ->add(
+                $builder->create(
+                    'siblings',
+                    'black_person_choice_list_person',
+                    array(
+                        'label'         => 'person.admin.person.siblings.text',
+                        'multiple'      => true,
+                        'by_reference'  => false,
+                        'required'      => false
+                    )
+                )
+                ->addModelTransformer(
+                    new ValuetoModelsOrNullTransformer($this->manager)
+                )
+            )
+            ->add(
+                'description',
+                'textarea',
+                array(
+                    'label'         => 'person.admin.person.description.text',
+                    'required'      => false
+                )
+            )
+            ->add(
+                'seeks',
+                'text',
+                array(
+                    'label'         =>'person.admin.person.seeks.text',
+                    'required'      => false
+                )
             );
-        if ($this->dbDriver === 'mongodb') {
-            $builder
-                ->add(
-                    'children',
-                    'document',
-                    array(
-                        'label'         => 'person.admin.person.children.text',
-                        'class'         => $this->class,
-                        'property'      => 'name',
-                        'multiple'      => true,
-                        'by_reference'  => false,
-                        'required'      => false
-                    )
-                )
-                ->add(
-                    'parents',
-                    'document',
-                    array(
-                        'label'         => 'person.admin.person.parent.text',
-                        'class'         => $this->class,
-                        'property'      => 'name',
-                        'multiple'      => true,
-                        'by_reference'  => false,
-                        'required'      => false
-                    )
-                )
-                ->add(
-                    'colleagues',
-                    'document',
-                    array(
-                        'label'         => 'person.admin.person.colleagues.text',
-                        'class'         => $this->class,
-                        'property'      => 'name',
-                        'multiple'      => true,
-                        'by_reference'  => false,
-                        'required'      => false
-                    )
-                )
-                ->add(
-                    'siblings',
-                    'document',
-                    array(
-                        'label'         => 'person.admin.person.siblings.text',
-                        'class'         => $this->class,
-                        'property'      => 'name',
-                        'multiple'      => true,
-                        'by_reference'  => false,
-                        'required'      => false
-                    )
-                );
-        } elseif ($this->dbDriver === 'mysql') {
-            $builder
-                ->add(
-                    'children',
-                    'entity',
-                    array(
-                        'label'         => 'person.admin.person.children.text',
-                        'class'         => $this->class,
-                            'property'      => 'name',
-                            'multiple'      => true,
-                            'required'      => false
-                        )
-                )
-                ->add(
-                    'parents',
-                    'entity',
-                    array(
-                        'label'         => 'person.admin.person.parent.text',
-                        'class'         => $this->class,
-                        'property'      => 'name',
-                        'multiple'      => true,
-                        'required'      => false
-                    )
-                )
-                ->add(
-                    'colleagues',
-                    'entity',
-                    array(
-                        'label'         => 'person.admin.person.colleagues.text',
-                        'class'         => $this->class,
-                        'property'      => 'name',
-                        'multiple'      => true,
-                        'required'      => false
-                    )
-                )
-                ->add(
-                    'siblings',
-                    'entity',
-                    array(
-                        'label'         => 'person.admin.person.siblings.text',
-                        'class'         => $this->class,
-                        'property'      => 'name',
-                        'multiple'      => true,
-                        'required'      => false
-                    )
-                );
-        }
-        $builder->add(
-            'description',
-            'textarea',
-            array(
-                'label'         => 'person.admin.person.description.text',
-                'required'      => false
-            )
-        )
-        ->add(
-            'seeks',
-            'text',
-            array(
-                'label'         =>'person.admin.person.seeks.text',
-                'required'      => false
-            )
-        );
     }
 
     /**

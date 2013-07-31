@@ -14,7 +14,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Black\Bundle\PersonBundle\Model\AbstractPerson;
 use Black\Bundle\CommonBundle\Traits\ThingEntityTrait;
 
@@ -34,8 +33,8 @@ abstract class Person extends AbstractPerson
     /**
      * @ORM\ManyToMany(targetEntity="PostalAddress", cascade={"persist", "remove"})
      * @ORM\JoinTable(name="person_postal_address",
-     *      joinColumns={@ORM\JoinColumn(name="person_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="postal_address_id", referencedColumnName="id")}
+     *      joinColumns={@ORM\JoinColumn(name="person_id", referencedColumnName="id", onDelete="CASCADE")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="postal_address_id", referencedColumnName="id", onDelete="CASCADE")}
      *      )
      */
     protected $address;
@@ -71,8 +70,8 @@ abstract class Person extends AbstractPerson
     /**
      * @ORM\ManyToMany(targetEntity="ContactPoint", cascade={"persist", "remove"})
      * @ORM\JoinTable(name="person_contact_point",
-     *      joinColumns={@ORM\JoinColumn(name="person_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="contact_point_id", referencedColumnName="id", unique=true)}
+     *      joinColumns={@ORM\JoinColumn(name="person_id", referencedColumnName="id", onDelete="CASCADE")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="contact_point_id", referencedColumnName="id", unique=true, onDelete="CASCADE")}
      *      )
      */
     protected $contactPoints;

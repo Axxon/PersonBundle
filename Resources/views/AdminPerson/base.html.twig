@@ -21,7 +21,7 @@
         {% block content_top %}
             {% include 'BlackAdminBundle:Admin:contentTop.html.twig' with {'title': "person.admin.contentTop.person.text"} %}
         {% endblock %}
-        {% include 'BlackPersonBundle:Admin:breadLine.html.twig' with {
+        {% include 'BlackConfigBundle:Admin:breadLine.html.twig' with {
             'route': admin_new,
             'text': "person.admin.breadLine.person.new.text",
             'a_route': admin_index,

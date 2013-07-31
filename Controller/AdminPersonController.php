@@ -232,13 +232,6 @@ class AdminPersonController extends Controller
                 throw $this->createNotFoundException('Unable to find Person document.');
             }
 
-            $userDocument = $this->get('black_user.manager.user')->findUserByPersonId($id);
-
-            if ($userDocument) {
-                $userDocument->setPerson(null);
-                $dm->persist($userDocument);
-            }
-
             $dm->remove($document);
             $dm->flush();
 
@@ -291,7 +284,7 @@ class AdminPersonController extends Controller
         }
 
         foreach ($ids as $id) {
-            $this->$method($id, $token);
+            $this->$method($id, $this->get('form.csrf_provider')->generateCsrfToken('delete'));
         }
 
         return $this->redirect($this->generateUrl('admin_persons'));

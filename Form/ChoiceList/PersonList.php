@@ -39,14 +39,13 @@ class PersonList extends LazyChoiceList
     {
         $choices    = array();
         $persons    = $this->getPersons();
-        $choices += array('other' => 'person.admin.person.choice.other.text');
 
         foreach ($persons as $person) {
             $choices += array($person->getId() => $person->getName());
         }
-        $choices = new SimpleChoiceList($choices);
+        $choiceList = new SimpleChoiceList($choices);
 
-        return $choices;
+        return $choiceList;
     }
 
     /**

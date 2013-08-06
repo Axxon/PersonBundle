@@ -141,10 +141,9 @@ class PersonRepository extends DocumentRepository implements PersonRepositoryInt
     {
         $qb = $this
             ->createQueryBuilder()
-            ->field('id')->notIn($person)
-            ->getQuery();
+            ->field('id')->notIn($person);
 
-        return $qb->execute();
+        return $qb;
     }
 
     /**

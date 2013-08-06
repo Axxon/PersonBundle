@@ -40,6 +40,7 @@ class SetPersonDataSubscriber implements EventSubscriberInterface
 
     /**
      * @param FormFactoryInterface $factory
+     * @param                      $dbDriver
      * @param                      $class
      */
     public function __construct(FormFactoryInterface $factory, $dbDriver, $class)
@@ -82,7 +83,7 @@ class SetPersonDataSubscriber implements EventSubscriberInterface
             $form->add(
                 $this->factory->createNamed(
                     'spouse',
-                    ($this->dbDriver=='mongodb')?'document':'entity',
+                    ($this->dbDriver=='mongodb') ? 'document' : 'entity',
                     null,
                     array(
                         'label'         => 'person.admin.setPersonData.spouse.text',
@@ -100,7 +101,7 @@ class SetPersonDataSubscriber implements EventSubscriberInterface
             $form->add(
                 $this->factory->createNamed(
                     'spouse',
-                    ($this->dbDriver=='mongodb')?'document':'entity',
+                    ($this->dbDriver == 'mongodb') ? 'document' : 'entity',
                     null,
                     array(
                         'label'         => 'person.admin.setPersonData.spouse.text',

@@ -34,7 +34,7 @@ class PersonType extends AbstractType
     protected $class;
 
     /**
-     * @var ObjectManager
+     * @var
      */
     protected $manager;
 
@@ -42,17 +42,14 @@ class PersonType extends AbstractType
      * @param string $dbDriver
      * @param string $class
      */
-    public function __construct(
-        $dbDriver,
-        $class
-    )
+    public function __construct($dbDriver, $class)
     {
         $this->dbDriver     = $dbDriver;
         $this->class        = $class;
     }
 
     /**
-     * @param ObjectManager $manager
+     * @param $manager
      */
     public function setManager($manager)
     {

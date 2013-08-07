@@ -65,7 +65,6 @@ class PersonFormHandler
 
             if ($this->form->isValid()) {
 
-                $person->upload();
                 $this->setFlash('success', 'success.person.admin.person.edit');
 
                 return true;

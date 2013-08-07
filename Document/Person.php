@@ -15,6 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Black\Bundle\PersonBundle\Model\AbstractPerson;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Black\Bundle\CommonBundle\Traits\ThingDocumentTrait;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Person Document
@@ -93,7 +94,7 @@ class Person extends AbstractPerson
     protected $honorificSuffix;
 
     /**
-     * @ODM\String
+     * @ODM\NotSaved
      * @Assert\Image(maxSize="2M")
      */
     protected $image;
@@ -135,6 +136,11 @@ class Person extends AbstractPerson
     protected $worksFor;
 
     /**
+     * @var
+     */
+    protected $filenameForRemove;
+
+    /**
      * @param $name
      */
     public function setName($name)
@@ -145,18 +151,53 @@ class Person extends AbstractPerson
     }
 
     /**
-     *
+     * {@inheritdoc}
+     */
+    public function setImage(UploadedFile $image = null)
+    {
+        $this->image = $image;
+
+        if (isset($this->path)) {
+            $this->temp = $this->path;
+            $this->path = null;
+        } else {
+            $this->path = 'initial';
+        }
+
+        return $this;
+    }
+
+
+    /**
+     * @ODM\PrePersist()
+     * @ODM\PreUpdate()
+     */
+    public function preUpload()
+    {
+        if (null !== $this->getImage()) {
+            $filename   = sha1(uniqid(mt_rand(), true));
+            $this->path = $filename . '.' . $this->getImage()->guessExtension();
+        }
+    }
+
+    /**
+     * @ODM\PostPersist()
+     * @ODM\PostUpdate()
      */
     public function upload()
     {
-        if (null === $this->image) {
+        if (null === $this->getImage()) {
             return;
         }
 
-        $this->path = sha1(uniqid(mt_rand(), true)) . '.' . $this->image->guessExtension();
-        $this->image->move($this->getUploadRootDir(), $this->path);
+        $this->getImage()->move($this->getUploadRootDir(), $this->path);
 
-        unset($this->image);
+        if (isset($this->temp)) {
+            unlink($this->getUploadRootDir() . '/' . $this->temp);
+            $this->temp = null;
+        }
+
+        $this->image = null;
     }
 
     /**
@@ -167,12 +208,5 @@ class Person extends AbstractPerson
         if ($image = $this->getAbsolutePath()) {
             unlink($image);
         }
-    }
-    
-    /**
-     * @ODM\PreRemove
-     */
-    public function onRemove()
-    {
     }
 }

@@ -12,6 +12,7 @@ namespace Black\Bundle\PersonBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Class AbstractPerson
@@ -128,6 +129,11 @@ abstract class AbstractPerson implements PersonInterface
      * @var
      */
     protected $worksFor;
+
+    /**
+     * @var
+     */
+    protected $temp;
 
     /**
      *
@@ -396,7 +402,7 @@ abstract class AbstractPerson implements PersonInterface
     /**
      * {@inheritdoc}
      */
-    public function setImage($image)
+    public function setImage(UploadedFile $image = null)
     {
         $this->image = $image;
 
@@ -650,6 +656,8 @@ abstract class AbstractPerson implements PersonInterface
             return $this->getAddress()->first()->getAddress();
         }
     }
+
+
     
     /**
      *
@@ -686,7 +694,7 @@ abstract class AbstractPerson implements PersonInterface
      */
     protected function getUploadRootDir()
     {
-        return __DIR__ . '/../../../../../../web/' . $this->getUploadDir();
+        return __DIR__ . '/../../../../../web/' . $this->getUploadDir();
     }
 
     /**

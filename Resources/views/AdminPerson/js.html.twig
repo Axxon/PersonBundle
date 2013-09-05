@@ -1,31 +1,49 @@
-{% block script %}
 <script type="text/javascript">
-    {% block js %}
+    var black_person_person_form_contactPointsOld;
     function black_person_person_form_contactPointsIntegrity() {
         jQuery('#black_person_person_form_contactPoints div:first-child div.field1 div.grid9 select option').each(function(index, value){
             if($(value).val() !== 'P' && $(value).val() !== '') {
                 $(value).remove();
             }
         });
+        var contactPointsFound = 0;
+        jQuery('#black_person_person_form_contactPoints div:first-child div.field1 div.grid9 select option').each(function(index, value){
+            if($(value).val() === 'P') {
+                contactPointsFound++;
+            }
+        });
+        if(contactPointsFound === 0) {
+            jQuery('#black_person_person_form_contactPoints div:first-child div.field1 div.grid9 select').append(black_person_person_form_contactPointsOld);
+        }
         jQuery('#black_person_person_form_contactPoints div:not(:first-child) div.field1 div.grid9 select option').each(function(index, value){
             if($(value).val() === 'P') {
+                black_person_person_form_contactPointsOld = $(value);
                 $(value).remove();
             }
         });
     }
 
+    var black_person_person_form_addressOld;
     function black_person_person_form_addressIntegrity() {
         jQuery('#black_person_person_form_address div:first-child div.field1 div.grid9 select option').each(function(index, value){
             if($(value).val() !== 'P' && $(value).val() !== '') {
                 $(value).remove();
             }
         });
+        var addressFound = 0;
+        jQuery('#black_person_person_form_address div:first-child div.field1 div.grid9 select option').each(function(index, value){
+            if($(value).val() === 'P') {
+                addressFound++;
+            }
+        });
+        if(addressFound === 0) {
+            jQuery('#black_person_person_form_address div:first-child div.field1 div.grid9 select').append(black_person_person_form_addressOld);
+        }
         jQuery('#black_person_person_form_address div:not(:first-child) div.field1 div.grid9 select option').each(function(index, value){
             if($(value).val() === 'P') {
+                black_person_person_form_addressOld = $(value);
                 $(value).remove();
             }
         });
     }
-    {% endblock %}
 </script>
-{% endblock %}

@@ -1,105 +1,31 @@
 {% block script %}
 <script type="text/javascript">
     {% block js %}
-    jQuery(document).ready(function() {
-        var contactCount = {{ form.contactPoints|length }};
-        var addressCount = {{ form.address|length }};
-
-        jQuery('#black_person_person_form_contactPoints').children('.formRow').each(function() {
-            addContactPointFormDeleteLink($(this));
-            contactIntegrity();
+    function black_person_person_form_contactPointsIntegrity() {
+        jQuery('#black_person_person_form_contactPoints div:first-child div.field1 div.grid9 select option').each(function(index, value){
+            if($(value).val() !== 'P' && $(value).val() !== '') {
+                $(value).remove();
+            }
         });
-        
-        jQuery('#black_person_person_form_address').children('.formRow').each(function() {
-            addAddressFormDeleteLink($(this));
-            addressIntegrity();
+        jQuery('#black_person_person_form_contactPoints div:not(:first-child) div.field1 div.grid9 select option').each(function(index, value){
+            if($(value).val() === 'P') {
+                $(value).remove();
+            }
         });
-            
-        jQuery('#add-another-contactPoint').click(function() {
-            var contactPointList = jQuery('#black_person_person_form_contactPoints');
+    }
 
-            var newWidget = contactPointList.attr('data-prototype');
-            newWidget = newWidget.replace(/__name__/g, contactCount);
-            contactCount++;
-
-            var newDiv = jQuery('<div class="formRow noBorderB"></div>').html(newWidget);
-            addContactPointFormDeleteLink(newDiv);
-            newDiv.appendTo(contactPointList);
-            contactIntegrity();
-            JQueryUIApplyStyle(newDiv);
-            return false;
+    function black_person_person_form_addressIntegrity() {
+        jQuery('#black_person_person_form_address div:first-child div.field1 div.grid9 select option').each(function(index, value){
+            if($(value).val() !== 'P' && $(value).val() !== '') {
+                $(value).remove();
+            }
         });
-
-        jQuery('#add-another-address').click(function() {
-            var addressList = jQuery('#black_person_person_form_address');
-
-            var newWidget = addressList.attr('data-prototype');
-            newWidget = newWidget.replace(/__name__/g, addressCount);
-            addressCount++;
-
-            var newDiv = jQuery('<div class="formRow noBorderB"></div>').html(newWidget);
-            addAddressFormDeleteLink(newDiv);
-            newDiv.appendTo(addressList);
-            addressIntegrity();
-            JQueryUIApplyStyle(newDiv);
-            return false;
+        jQuery('#black_person_person_form_address div:not(:first-child) div.field1 div.grid9 select option').each(function(index, value){
+            if($(value).val() === 'P') {
+                $(value).remove();
+            }
         });
-        
-        function contactIntegrity() {
-            jQuery('#black_person_person_form_contactPoints div:first-child div.field1 div.grid9 select option').each(function(index, value){
-                if($(value).val() !== 'P' && $(value).val() !== '') {
-                    $(value).remove();
-                }
-            });
-            jQuery('#black_person_person_form_contactPoints div:not(:first-child) div.field1 div.grid9 select option').each(function(index, value){
-                if($(value).val() === 'P') {
-                    $(value).remove();
-                }
-            });
-        }
-        
-        function addressIntegrity() {
-            jQuery('#black_person_person_form_address div:first-child div.field1 div.grid9 select option').each(function(index, value){
-                if($(value).val() !== 'P' && $(value).val() !== '') {
-                    $(value).remove();
-                }
-            });
-            jQuery('#black_person_person_form_address div:not(:first-child) div.field1 div.grid9 select option').each(function(index, value){
-                if($(value).val() === 'P') {
-                    $(value).remove();
-                }
-            });
-        }
-        
-        function addContactPointFormDeleteLink($tagFormDiv) {
-            var $removeFormA = $('<a href="#" class="add buttonS bRed mt10">{% trans from "views" %}person.admin.js.remove.text{% endtrans %}</a>');
-            $tagFormDiv.first('.formRow .grid9').append($removeFormA);
-
-            $removeFormA.on('click', function(e) {
-                contactCount--;
-                e.preventDefault();
-                $tagFormDiv.remove();
-                contactIntegrity();
-            });
-        }
-
-        function addAddressFormDeleteLink($tagFormDiv) {
-            var $removeFormB = $('<a href="#" class="add buttonS bRed mt10">{% trans  from "views" %}person.admin.js.remove.text{% endtrans %}</a>');
-            $tagFormDiv.append($removeFormB);
-
-            $removeFormB.on('click', function(e) {
-                addressCount--;
-                e.preventDefault();
-                $tagFormDiv.remove();
-                addressIntegrity();
-            });
-        }
-        
-        function JQueryUIApplyStyle($newDiv) {
-            $newDiv.find("select, .check, .check :checkbox, input:radio, input:file").uniform();
-        }
-    });
-
+    }
     {% endblock %}
 </script>
 {% endblock %}

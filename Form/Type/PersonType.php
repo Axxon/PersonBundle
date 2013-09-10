@@ -13,7 +13,6 @@ namespace Black\Bundle\PersonBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Black\Bundle\CommonBundle\Form\Transformer\ValuetoModelsOrNullTransformer;
 use Black\Bundle\PersonBundle\Form\EventListener\SetPersonDataSubscriber;
 
 /**
@@ -34,11 +33,6 @@ class PersonType extends AbstractType
     protected $class;
 
     /**
-     * @var
-     */
-    protected $manager;
-
-    /**
      * @param string $dbDriver
      * @param string $class
      */
@@ -46,14 +40,6 @@ class PersonType extends AbstractType
     {
         $this->dbDriver     = $dbDriver;
         $this->class        = $class;
-    }
-
-    /**
-     * @param $manager
-     */
-    public function setManager($manager)
-    {
-        $this->manager = $manager;
     }
 
     /**
@@ -191,63 +177,43 @@ class PersonType extends AbstractType
                     'required'      => false
                 )
             )->add(
-                $builder->create(
-                    'children',
-                    'black_person_choice_list_person',
-                    array(
-                        'label'         => 'person.admin.person.children.text',
-                        'multiple'      => true,
-                        'by_reference'  => false,
-                        'required'      => false
-                    )
-                )
-                ->addModelTransformer(
-                    new ValuetoModelsOrNullTransformer($this->manager)
+                'children',
+                'black_person_double_box_person',
+                array(
+                    'label'         => 'person.admin.person.children.text',
+                    'multiple'      => true,
+                    'by_reference'  => false,
+                    'required'      => false
                 )
             )
             ->add(
-                $builder->create(
-                    'parents',
-                    'black_person_choice_list_person',
-                    array(
-                        'label'         => 'person.admin.person.parent.text',
-                        'multiple'      => true,
-                        'by_reference'  => false,
-                        'required'      => false
-                    )
-                )
-                ->addModelTransformer(
-                    new ValuetoModelsOrNullTransformer($this->manager)
+                'parents',
+                'black_person_double_box_person',
+                array(
+                    'label'         => 'person.admin.person.parent.text',
+                    'multiple'      => true,
+                    'by_reference'  => false,
+                    'required'      => false
                 )
             )
             ->add(
-                $builder->create(
-                    'colleagues',
-                    'black_person_choice_list_person',
-                    array(
-                        'label'         => 'person.admin.person.colleagues.text',
-                        'multiple'      => true,
-                        'by_reference'  => false,
-                        'required'      => false
-                    )
-                )
-                ->addModelTransformer(
-                    new ValuetoModelsOrNullTransformer($this->manager)
+                'colleagues',
+                'black_person_double_box_person',
+                array(
+                    'label'         => 'person.admin.person.colleagues.text',
+                    'multiple'      => true,
+                    'by_reference'  => false,
+                    'required'      => false
                 )
             )
             ->add(
-                $builder->create(
-                    'siblings',
-                    'black_person_choice_list_person',
-                    array(
-                        'label'         => 'person.admin.person.siblings.text',
-                        'multiple'      => true,
-                        'by_reference'  => false,
-                        'required'      => false
-                    )
-                )
-                ->addModelTransformer(
-                    new ValuetoModelsOrNullTransformer($this->manager)
+                'siblings',
+                'black_person_double_box_person',
+                array(
+                    'label'         => 'person.admin.person.siblings.text',
+                    'multiple'      => true,
+                    'by_reference'  => false,
+                    'required'      => false
                 )
             )
             ->add(

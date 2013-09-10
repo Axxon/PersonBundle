@@ -14,9 +14,6 @@
         <service id="black_person.person.form.type" class="%black_person.person.form.type%" scope="request">
             <argument>%black_person.db_driver%</argument>
             <argument>%black_person.person.model.class%</argument>
-            <call method="setManager">
-                <argument type="service" id="black_person.manager.person" />
-            </call>
             <tag name="form.type" alias="black_person_person" />
         </service>
 
@@ -46,15 +43,26 @@
             <tag name="form.type" alias="black_person_choice_list_honorific_prefix" />
         </service>
 
-
         <service id="black_person.person.form.person_list" class="%black_person.person.form.person_list%" public="false" >
             <argument type="service" id="black_person.manager.person" />
         </service>
         
-        <service id="black_person.person.form.person_type" class="Black\Bundle\CommonBundle\Form\Type\CustomChoiceListType" public="true">
+        <service id="black_person.person.form.person_double_box_type" class="Black\Bundle\CommonBundle\Form\Type\CustomDoubleBoxType" public="true">
+            <argument type="service" id="black_person.person.form.person_list" />
+            <argument>black_person_double_box_person</argument>
+            <tag name="form.type" alias="black_person_double_box_person" />
+            <call method="setManager">
+                <argument type="service" id="black_person.manager.person" />
+            </call>
+        </service>
+        
+        <service id="black_person.person.form.person_choice_list_type" class="Black\Bundle\CommonBundle\Form\Type\CustomChoiceListType" public="true">
             <argument type="service" id="black_person.person.form.person_list" />
             <argument>black_person_choice_list_person</argument>
             <tag name="form.type" alias="black_person_choice_list_person" />
+            <call method="setManager">
+                <argument type="service" id="black_person.manager.person" />
+            </call>
         </service>
     </services>
 </container>

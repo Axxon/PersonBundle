@@ -19,6 +19,8 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  * Class ContactPointType
  *
  * @package Black\Bundle\PersonBundle\Form\Type
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
  */
 class ContactPointType extends AbstractType
 {
@@ -49,43 +51,28 @@ class ContactPointType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add(
-                'contactType',
-                'choice',
-                array(
+            ->add('contactType', 'choice', array(
                     'empty_value'       => 'person.admin.contactPoint.type.empty',
                     'label'             => 'person.admin.contactPoint.type.text',
                     'choice_list'       => $this->contact
                 )
             )
-            ->add(
-                'email',
-                'text',
-                array(
+            ->add('email', 'text', array(
                     'label'         => 'person.admin.contactPoint.email.text',
                     'required'      => false
                 )
             )
-            ->add(
-                'telephone',
-                'text',
-                array(
+            ->add('telephone', 'text', array(
                     'label'         => 'person.admin.contactPoint.phone.text',
                     'required'      => false
                 )
             )
-            ->add(
-                'mobile',
-                'text',
-                array(
+            ->add('mobile', 'text', array(
                     'label'         => 'person.admin.contactPoint.mobile.text',
                     'required'      => false
                 )
             )
-            ->add(
-                'faxNumber',
-                'text',
-                array(
+            ->add('faxNumber', 'text', array(
                     'label'         => 'person.admin.contactPoint.fax.text',
                     'required'      => false
                 )
@@ -99,8 +86,9 @@ class ContactPointType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class'    => $this->class,
-                'intention'     => 'contactpoint_form'
+                'data_class'            => $this->class,
+                'intention'             => 'contactpoint_form',
+                'translation_domaine'   => 'form'
             )
         );
     }

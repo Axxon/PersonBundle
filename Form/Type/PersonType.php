@@ -13,13 +13,14 @@ namespace Black\Bundle\PersonBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Black\Bundle\CommonBundle\Form\Transformer\ValuetoModelsOrNullTransformer;
 use Black\Bundle\PersonBundle\Form\EventListener\SetPersonDataSubscriber;
 
 /**
  * Class PersonType
  *
  * @package Black\Bundle\PersonBundle\Form\Type
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
  */
 class PersonType extends AbstractType
 {
@@ -34,11 +35,6 @@ class PersonType extends AbstractType
     protected $class;
 
     /**
-     * @var
-     */
-    protected $manager;
-
-    /**
      * @param string $dbDriver
      * @param string $class
      */
@@ -46,14 +42,6 @@ class PersonType extends AbstractType
     {
         $this->dbDriver     = $dbDriver;
         $this->class        = $class;
-    }
-
-    /**
-     * @param $manager
-     */
-    public function setManager($manager)
-    {
-        $this->manager = $manager;
     }
 
     /**
@@ -66,49 +54,31 @@ class PersonType extends AbstractType
         $builder->addEventSubscriber($subscriber);
 
         $builder
-            ->add(
-                'gender',
-                'black_person_choice_list_gender',
-                array(
+            ->add('gender', 'black_person_choice_list_gender', array(
                     'label'         => 'person.admin.person.gender.text',
                     'empty_value'   => 'person.admin.person.gender.empty'
                 )
             )
-            ->add(
-                'honorificPrefix',
-                'black_person_choice_list_honorific_prefix',
-                array(
+            ->add('honorificPrefix', 'black_person_choice_list_honorific_prefix', array(
                     'label'         => 'person.admin.person.honorificPrefix.text',
                     'required'      => false,
                     'empty_value'   => 'person.admin.person.honorificPrefix.empty'
                 )
             )
-            ->add(
-                'givenName',
-                'text',
-                array(
+            ->add('givenName', 'text', array(
                     'label'         => 'person.admin.person.name.given.text'
                 )
             )
-            ->add(
-                'additionalName',
-                'text',
-                array(
+            ->add('additionalName', 'text', array(
                     'label'         => 'person.admin.person.name.additional.text',
                     'required'      => false
                 )
             )
-            ->add(
-                'familyName',
-                'text',
-                array(
+            ->add('familyName', 'text', array(
                     'label'         => 'person.admin.person.name.family.text'
                 )
             )
-            ->add(
-                'birthdate',
-                'date',
-                array(
+            ->add('birthdate', 'date', array(
                     'label'         => 'person.admin.person.birthdate.text',
                     'years'         => array_reverse(
                         range(1900, date('Y', strtotime('now')))
@@ -120,35 +90,23 @@ class PersonType extends AbstractType
                         'day' => 'person.admin.person.birthdate.day.empty')
                 )
             )
-            ->add(
-                'image',
-                'file',
-                array(
+            ->add('image', 'file', array(
                     'label'         => 'person.admin.person.image.text',
                     'required'      => false
                 )
             )
 
-            ->add(
-                'email',
-                'email',
-                array(
+            ->add('email', 'email', array(
                     'label'         => 'person.admin.person.email.text'
                 )
             )
-            ->add(
-                'url',
-                'url',
-                array(
+            ->add('url', 'url', array(
                     'label'         => 'person.admin.person.url.text',
                     'required'      => false
                 )
             )
 
-            ->add(
-                'contactPoints',
-                'collection',
-                array(
+            ->add('contactPoints', 'collection', array(
                     'type'          => 'black_person_contactpoint',
                     'label'         => 'person.admin.person.contact.text',
                     'allow_add'     => true,
@@ -160,10 +118,7 @@ class PersonType extends AbstractType
                     ),
                 )
             )
-            ->add(
-                'address',
-                'collection',
-                array(
+            ->add('address', 'collection', array(
                     'type'          => 'black_person_postaladdress',
                     'label'         => 'person.admin.person.address.text',
                     'allow_add'     => true,
@@ -175,93 +130,50 @@ class PersonType extends AbstractType
                     ),
                 )
             )
-            ->add(
-                'jobTitle',
-                'text',
-                array(
+            ->add('jobTitle', 'text', array(
                     'label'         => 'person.admin.person.job.text',
                     'required'      => false
                 )
             )
-            ->add(
-                'worksFor',
-                'text',
-                array(
+            ->add('worksFor', 'text', array(
                     'label'         => 'person.admin.person.works.text',
                     'required'      => false
                 )
-            )->add(
-                $builder->create(
-                    'children',
-                    'black_person_choice_list_person',
-                    array(
-                        'label'         => 'person.admin.person.children.text',
-                        'multiple'      => true,
-                        'by_reference'  => false,
-                        'required'      => false
-                    )
-                )
-                ->addModelTransformer(
-                    new ValuetoModelsOrNullTransformer($this->manager)
+            )
+            ->add('children', 'black_person_double_box_person', array(
+                    'label'         => 'person.admin.person.children.text',
+                    'multiple'      => true,
+                    'by_reference'  => false,
+                    'required'      => false
                 )
             )
-            ->add(
-                $builder->create(
-                    'parents',
-                    'black_person_choice_list_person',
-                    array(
-                        'label'         => 'person.admin.person.parent.text',
-                        'multiple'      => true,
-                        'by_reference'  => false,
-                        'required'      => false
-                    )
-                )
-                ->addModelTransformer(
-                    new ValuetoModelsOrNullTransformer($this->manager)
+            ->add('parents', 'black_person_double_box_person', array(
+                    'label'         => 'person.admin.person.parent.text',
+                    'multiple'      => true,
+                    'by_reference'  => false,
+                    'required'      => false
                 )
             )
-            ->add(
-                $builder->create(
-                    'colleagues',
-                    'black_person_choice_list_person',
-                    array(
-                        'label'         => 'person.admin.person.colleagues.text',
-                        'multiple'      => true,
-                        'by_reference'  => false,
-                        'required'      => false
-                    )
-                )
-                ->addModelTransformer(
-                    new ValuetoModelsOrNullTransformer($this->manager)
+            ->add('colleagues', 'black_person_double_box_person', array(
+                    'label'         => 'person.admin.person.colleagues.text',
+                    'multiple'      => true,
+                    'by_reference'  => false,
+                    'required'      => false
                 )
             )
-            ->add(
-                $builder->create(
-                    'siblings',
-                    'black_person_choice_list_person',
-                    array(
-                        'label'         => 'person.admin.person.siblings.text',
-                        'multiple'      => true,
-                        'by_reference'  => false,
-                        'required'      => false
-                    )
-                )
-                ->addModelTransformer(
-                    new ValuetoModelsOrNullTransformer($this->manager)
+            ->add('siblings', 'black_person_double_box_person', array(
+                    'label'         => 'person.admin.person.siblings.text',
+                    'multiple'      => true,
+                    'by_reference'  => false,
+                    'required'      => false
                 )
             )
-            ->add(
-                'description',
-                'textarea',
-                array(
+            ->add('description', 'textarea', array(
                     'label'         => 'person.admin.person.description.text',
                     'required'      => false
                 )
             )
-            ->add(
-                'seeks',
-                'text',
-                array(
+            ->add('seeks', 'text', array(
                     'label'         =>'person.admin.person.seeks.text',
                     'required'      => false
                 )
@@ -275,8 +187,9 @@ class PersonType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class'    => $this->class,
-                'intention'     => 'person_form'
+                'data_class'            => $this->class,
+                'intention'             => 'person_form',
+                'translation_domain'    => 'form'
             )
         );
     }

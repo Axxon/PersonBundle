@@ -64,7 +64,10 @@ class FrontPersonFormHandler
             $person->setName(null);
 
             if ($this->form->isValid()) {
-                $person->upload();
+
+                if ($person->getAbsolutePath()) {
+                    unlink($person->getAbsolutePath());
+                }
 
                 $this->setFlash('success', 'success.person.www.person.edit');
 

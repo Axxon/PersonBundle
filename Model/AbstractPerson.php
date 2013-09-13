@@ -704,7 +704,10 @@ abstract class AbstractPerson implements PersonInterface
     {
         return 'uploads/profile';
     }
-    
+
+    /**
+     *
+     */
     public function onRemove()
     {
     }

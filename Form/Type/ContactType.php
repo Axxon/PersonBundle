@@ -18,6 +18,8 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  * Class ContactType
  *
  * @package Black\Bundle\PersonBundle\Form\Type
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
  */
 class ContactType extends AbstractType
 {
@@ -29,20 +31,14 @@ class ContactType extends AbstractType
     {
 
         $builder
-            ->add(
-                'value',
-                'textarea',
-                array(
+            ->add('value', 'textarea', array(
                     'label' => ' ',
                     "attr"  => array(
                         "rows" => 5
                     )
                 )
             )
-            ->add(
-                'to',
-                'hidden',
-                array(
+            ->add('to', 'hidden', array(
                     'data'  => $options['data']['id']
                 )
             );
@@ -55,8 +51,9 @@ class ContactType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class'    => null,
-                'intention'     => 'contact_form'
+                'data_class'            => null,
+                'intention'             => 'contact_form',
+                'translation_domain'    => 'form'
             )
         );
     }

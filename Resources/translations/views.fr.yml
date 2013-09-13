@@ -36,10 +36,6 @@ person:
       person:
         text: Personnes
     
-    js:
-      remove:
-        text: Enlever
-    
     mail:
       actions:
         text: Actions

@@ -15,7 +15,9 @@ use Black\Bundle\CommonBundle\Form\Type\PostalAddressType as AbstractPostalAddre
 /**
  * Class PostalAddressType
  *
- * @package Black\Bundle\EventBundle\Form\Type
+ * @package Black\Bundle\PersonBundle\Form\Type
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
  */
 class PostalAddressType extends AbstractPostalAddressType
 {

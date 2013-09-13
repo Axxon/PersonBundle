@@ -10,12 +10,12 @@ use Black\Bundle\PersonBundle\Model\PersonInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
- * @Route("/profile")
+ * @Route("/person")
  */
-class ProfileController extends Controller
+class PersonController extends Controller
 {
     /**
-     * @Route("/me.html", name="profile_me")
+     * @Route("/me.html", name="person_me")
      * @Secure(roles="ROLE_USER")
      * @Template()
      */
@@ -31,22 +31,24 @@ class ProfileController extends Controller
         if (!is_object($person) || !$person instanceof PersonInterface) {
             $new    = true;
             $person = $personManager->createInstance();
+            $person->setEmail($user->getEmail());
         }
 
         $formHandler    = $this->get('black_person.person.form.front_handler');
         $process        = $formHandler->process($person);
 
         if ($process) {
-            $personManager->persist($person);
 
             if (true === $new) {
+                $personManager->persist($person);
                 $user->setPerson($person);
                 $userManager->persist($user);
+            } else {
+                $personManager->flush();
             }
 
-            $userManager->flush();
 
-            return $this->redirect($this->generateUrl('profile_me'));
+            $userManager->flush();
         }
 
         return array(

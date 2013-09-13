@@ -33,7 +33,7 @@ class Person extends AbstractPerson
     protected $additionalName;
 
     /**
-     * @ODM\EmbedMany(targetDocument="PostalAddress")
+     * @ODM\EmbedMany(targetDocument="Black\Bundle\PersonBundle\Document\PostalAddress")
      */
     protected $address;
 
@@ -53,7 +53,7 @@ class Person extends AbstractPerson
     protected $colleagues;
 
     /**
-     * @ODM\EmbedMany(targetDocument="ContactPoint")
+     * @ODM\EmbedMany(targetDocument="Black\Bundle\PersonBundle\Document\ContactPoint")
      */
     protected $contactPoints;
 
@@ -94,7 +94,6 @@ class Person extends AbstractPerson
     protected $honorificSuffix;
 
     /**
-     * @ODM\NotSaved
      * @Assert\Image(maxSize="2M")
      */
     protected $image;
@@ -151,30 +150,13 @@ class Person extends AbstractPerson
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function setImage(UploadedFile $image = null)
-    {
-        $this->image = $image;
-
-        if (isset($this->path)) {
-            $this->temp = $this->path;
-            $this->path = null;
-        } else {
-            $this->path = 'initial';
-        }
-
-        return $this;
-    }
-
-
-    /**
      * @ODM\PrePersist()
      * @ODM\PreUpdate()
      */
     public function preUpload()
     {
         if (null !== $this->getImage()) {
+
             $filename   = sha1(uniqid(mt_rand(), true));
             $this->path = $filename . '.' . $this->getImage()->guessExtension();
         }
@@ -189,6 +171,8 @@ class Person extends AbstractPerson
         if (null === $this->getImage()) {
             return;
         }
+
+
 
         $this->getImage()->move($this->getUploadRootDir(), $this->path);
 

@@ -19,6 +19,8 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  * Class FrontPersonType
  *
  * @package Black\Bundle\PersonBundle\Form\Type
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
  */
 class FrontPersonType extends AbstractType
 {
@@ -42,78 +44,54 @@ class FrontPersonType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add(
-                'gender',
-                'black_person_choice_list_gender',
-                array(
+            ->add('gender', 'black_person_choice_list_gender', array(
                     'label'         => 'person.www.person.gender.text',
                     'empty_value'   => 'person.www.person.gender.choice'
                 )
             )
 
-            ->add(
-                'givenName',
-                'text',
-                array(
+            ->add('givenName', 'text', array(
                     'label'         => 'person.www.person.name.given.text'
                 )
             )
-            ->add(
-                'familyName',
-                'text',
-                array(
+            ->add('familyName', 'text', array(
                     'label'         => 'person.www.person.name.family.text'
                 )
             )
 
-            ->add(
-                'birthdate',
-                'date',
-                array(
+            ->add('birthdate', 'date', array(
                     'years'         => array_reverse(
                         range(1900, date('Y', strtotime('now')))
                     ),
                     'label'         => 'person.www.person.birthdate.text',
                     'required'      => false,
                     'empty_value'   => array(
-                        'year' => 'person.www.person.birthdate.year.empty',
+                        'year'  => 'person.www.person.birthdate.year.empty',
                         'month' => 'person.www.person.birthdate.month.empty',
-                        'day' => 'person.www.person.birthdate.day.empty')
+                        'day'   => 'person.www.person.birthdate.day.empty')
                 )
             )
-            ->add(
-                'image',
-                'file',
-                array(
+            ->add('image', 'file', array(
                     'label'         => 'person.www.person.image.text',
                     'required'      => false
                 )
             )
-            ->add(
-                'email',
-                'email',
-                array(
+            ->add('email', 'email', array(
                     'label'         => 'person.www.person.email.text'
                 )
             )
-            ->add(
-                'url',
-                'url',
-                array(
+            ->add('url', 'url', array(
                     'required'      => false,
                     'label'         => 'person.www.person.url.text'
                 )
             )
 
-            ->add(
-                'description',
-                'textarea',
-                array(
+            ->add('description', 'textarea', array(
                     'required'      => false,
                     'label'         => 'person.www.person.description.text',
                     'attr'          => array(
-                        'rows'          => 20,
-                        'style'         => 'width:100%;',
+                        'rows'          => '10',
+                        'class'         => 'span12',
                         'placeholder'   => 'person.www.person.description.placeholder'
                     )
                 )
@@ -127,8 +105,9 @@ class FrontPersonType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class'    => $this->class,
-                'intention'     => 'front_person_form'
+                'data_class'            => $this->class,
+                'intention'             => 'front_person_form',
+                'translation_domain'    => 'form'
             )
         );
     }

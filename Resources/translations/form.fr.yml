@@ -84,7 +84,7 @@ person:
           dr:
             text:  Docteur
       image:
-        text: Image
+        text: Avatar
       job:
         text: Profession
       name:
@@ -173,7 +173,7 @@ person:
         text: Sexe
         choice: Choisir une valeur
       image:
-        text: Image
+        text: Avatar
       name:
         family:
           text: Nom de famille

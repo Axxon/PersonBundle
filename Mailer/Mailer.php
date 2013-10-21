@@ -8,15 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Black\Bundle\PersonBundle\Mailer;
 
 use Black\Bundle\PersonBundle\Model\PersonInterface;
-use Black\Bundle\PersonBundle\Model\ConfigManagerInterface;
+use Black\Bundle\ConfigBundle\Model\ConfigManagerInterface;
 
 /**
  * Class Mailer
  *
  * @package Black\Bundle\PersonBundle\Mailer
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
  */
 class Mailer
 {
@@ -46,12 +49,8 @@ class Mailer
      * @param ConfigManagerInterface $manager
      * @param array                  $parameters
      */
-    public function __construct(
-        \Swift_Mailer $mailer,
-        \Twig_Environment $twig,
-        ConfigManagerInterface $manager,
-        array $parameters
-    ) {
+    public function __construct(\Swift_Mailer $mailer, \Twig_Environment $twig, ConfigManagerInterface $manager, array $parameters)
+    {
         $this->mailer       = $mailer;
         $this->twig         = $twig;
         $this->manager      = $manager;

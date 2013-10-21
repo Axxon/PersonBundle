@@ -1,13 +1,14 @@
 <?php
 
 /*
- * This file is part of the Blackperson package.
+ * This file is part of the Black package.
  *
  * (c) Alexandre Balmes <albalmes@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Black\Bundle\PersonBundle\Form\Handler;
 
 use Symfony\Component\Form\FormInterface;
@@ -19,6 +20,8 @@ use Black\Bundle\PersonBundle\Model\PersonInterface;
  * Class FrontPersonFormHandler
  *
  * @package Black\Bundle\PersonBundle\Form\Handler
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
  */
 class FrontPersonFormHandler
 {
@@ -54,6 +57,11 @@ class FrontPersonFormHandler
         $this->session  = $session;
     }
 
+    /**
+     * @param PersonInterface $person
+     *
+     * @return bool
+     */
     public function process(PersonInterface $person)
     {
         $this->form->setData($person);
@@ -78,11 +86,20 @@ class FrontPersonFormHandler
         }
     }
 
+    /**
+     * @return FormInterface
+     */
     public function getForm()
     {
         return $this->form;
     }
 
+    /**
+     * @param $name
+     * @param $msg
+     *
+     * @return mixed
+     */
     protected function setFlash($name, $msg)
     {
         return $this->session->getFlashBag()->add($name, $msg);

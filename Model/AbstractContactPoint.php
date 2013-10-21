@@ -8,12 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Black\Bundle\PersonBundle\Model;
 
 /**
  * Class AbstractContactPoint
  *
  * @package Black\Bundle\PersonBundle\Model
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
  */
 abstract class AbstractContactPoint implements ContactPointInterface
 {
@@ -48,7 +51,7 @@ abstract class AbstractContactPoint implements ContactPointInterface
     protected $mobile;
 
     /**
-     * {@inheritdoc}
+     * @return int
      */
     public function getId()
     {
@@ -56,7 +59,9 @@ abstract class AbstractContactPoint implements ContactPointInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param $contactType
+     *
+     * @return $this
      */
     public function setContactType($contactType)
     {
@@ -66,7 +71,7 @@ abstract class AbstractContactPoint implements ContactPointInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return String
      */
     public function getContactType()
     {
@@ -74,7 +79,9 @@ abstract class AbstractContactPoint implements ContactPointInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param $email
+     *
+     * @return $this
      */
     public function setEmail($email)
     {
@@ -84,7 +91,7 @@ abstract class AbstractContactPoint implements ContactPointInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return String
      */
     public function getEmail()
     {
@@ -92,7 +99,9 @@ abstract class AbstractContactPoint implements ContactPointInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param $telephone
+     *
+     * @return $this
      */
     public function setTelephone($telephone)
     {
@@ -102,7 +111,7 @@ abstract class AbstractContactPoint implements ContactPointInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return String
      */
     public function getTelephone()
     {
@@ -110,7 +119,9 @@ abstract class AbstractContactPoint implements ContactPointInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param $mobile
+     *
+     * @return $this
      */
     public function setMobile($mobile)
     {
@@ -120,7 +131,7 @@ abstract class AbstractContactPoint implements ContactPointInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return String
      */
     public function getMobile()
     {

@@ -1,13 +1,14 @@
 <?php
 
 /*
- * This file is part of the Blackperson package.
+ * This file is part of the Black package.
  *
  * (c) Alexandre Balmes <albalmes@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Black\Bundle\PersonBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
@@ -15,12 +16,16 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
- * BlackEngine Configuration
+ * Class Configuration
+ *
+ * @package Black\Bundle\PersonBundle\DependencyInjection
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
  */
 class Configuration implements ConfigurationInterface
 {
     /**
-     * {@inheritDoc}
+     * @return TreeBuilder
      */
     public function getConfigTreeBuilder()
     {
@@ -57,6 +62,9 @@ class Configuration implements ConfigurationInterface
         return $treeBuilder;
     }
 
+    /**
+     * @param ArrayNodeDefinition $node
+     */
     private function addProfileSection(ArrayNodeDefinition $node)
     {
         $node
@@ -98,6 +106,9 @@ class Configuration implements ConfigurationInterface
             ->end();
     }
 
+    /**
+     * @param ArrayNodeDefinition $node
+     */
     private function addContactPointSection(ArrayNodeDefinition $node)
     {
         $node
@@ -122,6 +133,9 @@ class Configuration implements ConfigurationInterface
             ->end();
     }
 
+    /**
+     * @param ArrayNodeDefinition $node
+     */
     private function addPostalAddressSection(ArrayNodeDefinition $node)
     {
         $node
@@ -146,6 +160,9 @@ class Configuration implements ConfigurationInterface
             ->end();
     }
 
+    /**
+     * @param ArrayNodeDefinition $node
+     */
     private function addServiceSection(ArrayNodeDefinition $node)
     {
         $node

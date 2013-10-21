@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Blackperson package.
+ * This file is part of the Black package.
  *
  * (c) Alexandre Balmes <albalmes@gmail.com>
  *
@@ -13,8 +14,18 @@ namespace Black\Bundle\PersonBundle\Form\ChoiceList;
 use Symfony\Component\Form\Extension\Core\ChoiceList\LazyChoiceList;
 use Symfony\Component\Form\Extension\Core\ChoiceList\SimpleChoiceList;
 
+/**
+ * Class HonorificPrefixList
+ *
+ * @package Black\Bundle\PersonBundle\Form\ChoiceList
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
+ */
 class HonorificPrefixList extends LazyChoiceList
 {
+    /**
+     * @return mixed
+     */
     public function createList()
     {
         $class  = $this->getClass();
@@ -23,6 +34,9 @@ class HonorificPrefixList extends LazyChoiceList
         return $page;
     }
 
+    /**
+     * @return \Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceListInterface|SimpleChoiceList
+     */
     protected function loadChoiceList()
     {
         $array = array(
@@ -38,6 +52,9 @@ class HonorificPrefixList extends LazyChoiceList
         return $choices;
     }
 
+    /**
+     * @return $this
+     */
     protected function getClass()
     {
         return $this;

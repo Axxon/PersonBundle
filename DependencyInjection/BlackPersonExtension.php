@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Black package.
+ *
+ * (c) Alexandre Balmes <albalmes@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Black\Bundle\PersonBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Processor;
@@ -9,12 +18,19 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 /**
- * BlackEngineExtension
+ * Class BlackPersonExtension
+ *
+ * @package Black\Bundle\PersonBundle\DependencyInjection
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
  */
 class BlackPersonExtension extends Extension
 {
     /**
-     * {@inheritDoc}
+     * @param array            $configs
+     * @param ContainerBuilder $container
+     *
+     * @throws \InvalidArgumentException
      */
     public function load(array $configs, ContainerBuilder $container)
     {
@@ -69,6 +85,11 @@ class BlackPersonExtension extends Extension
         }
     }
 
+    /**
+     * @param array            $config
+     * @param ContainerBuilder $container
+     * @param XmlFileLoader    $loader
+     */
     private function loadPerson(array $config, ContainerBuilder $container, XmlFileLoader $loader)
     {
         foreach (array('person', 'front_person') as $basename) {
@@ -84,6 +105,11 @@ class BlackPersonExtension extends Extension
         );
     }
 
+    /**
+     * @param array            $config
+     * @param ContainerBuilder $container
+     * @param XmlFileLoader    $loader
+     */
     private function loadContactPoint(array $config, ContainerBuilder $container, XmlFileLoader $loader)
     {
         $loader->load('contactPoint.xml');
@@ -97,6 +123,11 @@ class BlackPersonExtension extends Extension
         );
     }
 
+    /**
+     * @param array            $config
+     * @param ContainerBuilder $container
+     * @param XmlFileLoader    $loader
+     */
     private function loadPostalAddress(array $config, ContainerBuilder $container, XmlFileLoader $loader)
     {
         $loader->load('postalAddress.xml');
@@ -110,6 +141,11 @@ class BlackPersonExtension extends Extension
         );
     }
 
+    /**
+     * @param array            $config
+     * @param ContainerBuilder $container
+     * @param array            $map
+     */
     protected function remapParameters(array $config, ContainerBuilder $container, array $map)
     {
         foreach ($map as $name => $paramName) {
@@ -119,6 +155,11 @@ class BlackPersonExtension extends Extension
         }
     }
 
+    /**
+     * @param array            $config
+     * @param ContainerBuilder $container
+     * @param array            $namespaces
+     */
     protected function remapParametersNamespaces(array $config, ContainerBuilder $container, array $namespaces)
     {
         foreach ($namespaces as $ns => $map) {

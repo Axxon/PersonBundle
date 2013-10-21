@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Black package.
+ *
+ * (c) Alexandre Balmes <albalmes@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Black\Bundle\PersonBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -10,7 +19,13 @@ use Black\Bundle\PersonBundle\Model\PersonInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
+ * Class PersonController
+ *
  * @Route("/person")
+ *
+ * @package Black\Bundle\PersonBundle\Controller
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
  */
 class PersonController extends Controller
 {
@@ -18,6 +33,8 @@ class PersonController extends Controller
      * @Route("/me.html", name="person_me")
      * @Secure(roles="ROLE_USER")
      * @Template()
+     *
+     * @return array
      */
     public function meAction()
     {
@@ -58,8 +75,6 @@ class PersonController extends Controller
     }
 
     /**
-     * Returns the DocumentManager
-     *
      * @return DocumentManager
      */
     protected function getPersonManager()
@@ -68,8 +83,6 @@ class PersonController extends Controller
     }
 
     /**
-     * Returns the User Manager
-     *
      * @return DocumentManager
      */
     protected function getUserManager()

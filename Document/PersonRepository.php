@@ -8,6 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Black\Bundle\PersonBundle\Document;
 
 use Black\Bundle\PersonBundle\Model\PersonRepositoryInterface;
@@ -17,7 +18,9 @@ use Doctrine\ODM\MongoDB\DocumentNotFoundException;
 /**
  * Class PersonRepository
  *
- * @package Black\Bundle\PersonBundle\Document\Person
+ * @package Black\Bundle\PersonBundle\Document
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
  */
 class PersonRepository extends DocumentRepository implements PersonRepositoryInterface
 {

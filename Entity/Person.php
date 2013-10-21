@@ -8,6 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Black\Bundle\PersonBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -18,7 +19,11 @@ use Black\Bundle\PersonBundle\Model\AbstractPerson;
 use Black\Bundle\CommonBundle\Traits\ThingEntityTrait;
 
 /**
- * Person Entity
+ * Class Person
+ *
+ * @package Black\Bundle\PersonBundle\Entity
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
  */
 abstract class Person extends AbstractPerson
 {

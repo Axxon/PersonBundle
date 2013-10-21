@@ -8,6 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Black\Bundle\PersonBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
@@ -18,9 +19,13 @@ use Black\Bundle\CommonBundle\Traits\ThingDocumentTrait;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
- * Person Document
+ * Class Person
  *
  * @ODM\MappedSuperclass()
+ *
+ * @package Black\Bundle\PersonBundle\Document
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
  */
 class Person extends AbstractPerson
 {
@@ -171,8 +176,6 @@ class Person extends AbstractPerson
         if (null === $this->getImage()) {
             return;
         }
-
-
 
         $this->getImage()->move($this->getUploadRootDir(), $this->path);
 

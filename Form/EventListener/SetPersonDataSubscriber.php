@@ -8,6 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Black\Bundle\PersonBundle\Form\EventListener;
 
 use Symfony\Component\Form\FormFactoryInterface;
@@ -20,6 +21,8 @@ use Black\Bundle\PersonBundle\Model\PersonRepositoryInterface;
  * Class SetPersonDataSubscriber
  *
  * @package Black\Bundle\PersonBundle\Form\EventListener
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
  */
 class SetPersonDataSubscriber implements EventSubscriberInterface
 {
@@ -27,7 +30,7 @@ class SetPersonDataSubscriber implements EventSubscriberInterface
      * @var \Symfony\Component\Form\FormFactoryInterface
      */
     private $factory;
-    
+
     /**
      * @var
      */

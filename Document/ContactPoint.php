@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Blackperson package.
+ * This file is part of the Black package.
  *
  * (c) Alexandre Balmes <albalmes@gmail.com>
  *
@@ -17,9 +17,13 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Black\Bundle\CommonBundle\Traits\ContactPointDocumentTrait;
 
 /**
- * ContactPoint Document
+ * Class ContactPoint
  *
  * @ODM\EmbeddedDocument
+ *
+ * @package Black\Bundle\PersonBundle\Document
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
  */
 class ContactPoint
 {

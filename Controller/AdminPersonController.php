@@ -8,6 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Black\Bundle\PersonBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -20,15 +21,17 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 /**
- * Controller managing the person profile`
+ * Class AdminPersonController
  *
  * @Route("/admin/person")
+ *
+ * @package Black\Bundle\PersonBundle\Controller
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
  */
 class AdminPersonController extends Controller
 {
     /**
-     * Show lists of Persons
-     *
      * @Method("GET")
      * @Route("/index.html", name="admin_persons")
      * @Secure(roles="ROLE_ADMIN")
@@ -55,8 +58,6 @@ class AdminPersonController extends Controller
     }
 
     /**
-     * Show lists of Persons
-     *
      * @Method("GET")
      * @Route("/list.json", name="admin_persons_json")
      * @Secure(roles="ROLE_ADMIN")
@@ -91,8 +92,6 @@ class AdminPersonController extends Controller
     }
 
     /**
-     * Show a person
-     *
      * @param integer $id
      * 
      * @Method({"GET"})
@@ -126,8 +125,6 @@ class AdminPersonController extends Controller
     }
 
     /**
-     * Displays a form to create a new Person document.
-     *
      * @Method({"GET", "POST"})
      * @Route("/new", name="admin_person_new")
      * @Secure(roles="ROLE_ADMIN")
@@ -156,8 +153,6 @@ class AdminPersonController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing Person document.
-     *
      * @param string $id The document ID
      * 
      * @Method({"GET", "POST"})
@@ -199,8 +194,6 @@ class AdminPersonController extends Controller
     }
 
     /**
-     * Deletes a Person document.
-     *
      * @param integer $id
      * @param string  $token
      * 
@@ -245,8 +238,6 @@ class AdminPersonController extends Controller
     }
 
     /**
-     * Deletes a Person document.
-     *
      * @Method({"POST"})
      * @Route("/batch", name="admin_person_batch")
      *
@@ -291,6 +282,11 @@ class AdminPersonController extends Controller
 
     }
 
+    /**
+     * @param $id
+     *
+     * @return \Symfony\Component\Form\Form
+     */
     protected function createDeleteForm($id)
     {
         $form = $this->createFormBuilder(array('id' => $id))
@@ -301,8 +297,6 @@ class AdminPersonController extends Controller
     }
 
     /**
-     * Returns the DocumentManager
-     *
      * @return DocumentManager
      */
     protected function getManager()

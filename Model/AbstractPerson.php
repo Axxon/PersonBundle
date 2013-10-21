@@ -8,6 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Black\Bundle\PersonBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -18,6 +19,8 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  * Class AbstractPerson
  *
  * @package Black\Bundle\PersonBundle\Model
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
  */
 abstract class AbstractPerson implements PersonInterface
 {
@@ -154,7 +157,7 @@ abstract class AbstractPerson implements PersonInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return mixed
      */
     public function getId()
     {
@@ -162,7 +165,9 @@ abstract class AbstractPerson implements PersonInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param $additionalName
+     *
+     * @return $this
      */
     public function setAdditionalName($additionalName)
     {
@@ -172,7 +177,7 @@ abstract class AbstractPerson implements PersonInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return mixed
      */
     public function getAdditionalName()
     {
@@ -180,7 +185,9 @@ abstract class AbstractPerson implements PersonInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param $address
+     *
+     * @return $this
      */
     public function setAddress($address)
     {
@@ -190,7 +197,7 @@ abstract class AbstractPerson implements PersonInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return mixed
      */
     public function getAddress()
     {
@@ -198,7 +205,9 @@ abstract class AbstractPerson implements PersonInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param $birthdate
+     *
+     * @return $this
      */
     public function setBirthdate($birthdate)
     {
@@ -208,7 +217,7 @@ abstract class AbstractPerson implements PersonInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return mixed
      */
     public function getBirthdate()
     {
@@ -216,7 +225,7 @@ abstract class AbstractPerson implements PersonInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return mixed
      */
     public function getColleagues()
     {
@@ -224,7 +233,9 @@ abstract class AbstractPerson implements PersonInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param $colleagues
+     *
+     * @return $this
      */
     public function setColleague($colleagues)
     {
@@ -234,7 +245,7 @@ abstract class AbstractPerson implements PersonInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param PersonInterface $person
      */
     public function addColleague(PersonInterface $person)
     {
@@ -246,7 +257,7 @@ abstract class AbstractPerson implements PersonInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param PersonInterface $person
      */
     public function removeColleague(PersonInterface $person)
     {
@@ -258,7 +269,9 @@ abstract class AbstractPerson implements PersonInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param $contactPoints
+     *
+     * @return $this
      */
     public function setContactPoints($contactPoints)
     {
@@ -268,7 +281,7 @@ abstract class AbstractPerson implements PersonInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return mixed
      */
     public function getContactPoints()
     {
@@ -276,7 +289,9 @@ abstract class AbstractPerson implements PersonInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param $email
+     *
+     * @return $this
      */
     public function setEmail($email)
     {
@@ -286,7 +301,7 @@ abstract class AbstractPerson implements PersonInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return mixed
      */
     public function getEmail()
     {
@@ -294,7 +309,9 @@ abstract class AbstractPerson implements PersonInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param $familyName
+     *
+     * @return $this
      */
     public function setFamilyName($familyName)
     {
@@ -304,7 +321,7 @@ abstract class AbstractPerson implements PersonInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return mixed
      */
     public function getFamilyName()
     {
@@ -312,7 +329,9 @@ abstract class AbstractPerson implements PersonInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param $gender
+     *
+     * @return $this
      */
     public function setGender($gender)
     {
@@ -322,7 +341,7 @@ abstract class AbstractPerson implements PersonInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return mixed
      */
     public function getGender()
     {
@@ -338,7 +357,9 @@ abstract class AbstractPerson implements PersonInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param $givenName
+     *
+     * @return $this
      */
     public function setGivenName($givenName)
     {
@@ -348,7 +369,7 @@ abstract class AbstractPerson implements PersonInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return mixed
      */
     public function getGivenName()
     {
@@ -356,7 +377,9 @@ abstract class AbstractPerson implements PersonInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param $honorificPrefix
+     *
+     * @return $this
      */
     public function setHonorificPrefix($honorificPrefix)
     {
@@ -366,7 +389,7 @@ abstract class AbstractPerson implements PersonInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return mixed
      */
     public function getHonorificPrefix()
     {
@@ -382,7 +405,9 @@ abstract class AbstractPerson implements PersonInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param $honorificSuffix
+     *
+     * @return $this
      */
     public function setHonorificSuffix($honorificSuffix)
     {
@@ -392,7 +417,7 @@ abstract class AbstractPerson implements PersonInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return mixed
      */
     public function getHonorificSuffix()
     {
@@ -400,7 +425,9 @@ abstract class AbstractPerson implements PersonInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param UploadedFile $image
+     *
+     * @return $this
      */
     public function setImage(UploadedFile $image = null)
     {
@@ -410,7 +437,7 @@ abstract class AbstractPerson implements PersonInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return mixed
      */
     public function getImage()
     {
@@ -418,7 +445,9 @@ abstract class AbstractPerson implements PersonInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param $jobTitle
+     *
+     * @return $this
      */
     public function setJobTitle($jobTitle)
     {
@@ -428,7 +457,7 @@ abstract class AbstractPerson implements PersonInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return mixed
      */
     public function getJobTitle()
     {
@@ -436,7 +465,9 @@ abstract class AbstractPerson implements PersonInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param $children
+     *
+     * @return $this
      */
     public function setChild($children)
     {
@@ -446,7 +477,9 @@ abstract class AbstractPerson implements PersonInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param $parents
+     *
+     * @return $this
      */
     public function setParent($parents)
     {
@@ -456,7 +489,7 @@ abstract class AbstractPerson implements PersonInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return ArrayCollection|mixed
      */
     public function getChildren()
     {
@@ -464,7 +497,9 @@ abstract class AbstractPerson implements PersonInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param $path
+     *
+     * @return $this
      */
     public function setPath($path)
     {
@@ -474,7 +509,7 @@ abstract class AbstractPerson implements PersonInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return mixed
      */
     public function getPath()
     {
@@ -482,7 +517,7 @@ abstract class AbstractPerson implements PersonInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return ArrayCollection|mixed
      */
     public function getParents()
     {
@@ -490,7 +525,7 @@ abstract class AbstractPerson implements PersonInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param PersonInterface $person
      */
     public function addChild(PersonInterface $person)
     {
@@ -502,7 +537,7 @@ abstract class AbstractPerson implements PersonInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param PersonInterface $person
      */
     public function addParent(PersonInterface $person)
     {
@@ -514,7 +549,7 @@ abstract class AbstractPerson implements PersonInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param PersonInterface $person
      */
     public function removeChild(PersonInterface $person)
     {
@@ -526,7 +561,7 @@ abstract class AbstractPerson implements PersonInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param PersonInterface $person
      */
     public function removeParent(PersonInterface $person)
     {
@@ -538,7 +573,9 @@ abstract class AbstractPerson implements PersonInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param $seeks
+     *
+     * @return $this
      */
     public function setSeeks($seeks)
     {
@@ -548,7 +585,7 @@ abstract class AbstractPerson implements PersonInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return ArrayCollection|mixed
      */
     public function getSeeks()
     {
@@ -556,7 +593,9 @@ abstract class AbstractPerson implements PersonInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param $sibling
+     *
+     * @return $this
      */
     public function setSibling($sibling)
     {
@@ -566,7 +605,7 @@ abstract class AbstractPerson implements PersonInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return mixed
      */
     public function getSiblings()
     {
@@ -574,7 +613,7 @@ abstract class AbstractPerson implements PersonInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param PersonInterface $person
      */
     public function addSibling(PersonInterface $person)
     {
@@ -586,7 +625,7 @@ abstract class AbstractPerson implements PersonInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param PersonInterface $person
      */
     public function removeSibling(PersonInterface $person)
     {
@@ -598,7 +637,9 @@ abstract class AbstractPerson implements PersonInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param $spouse
+     *
+     * @return $this
      */
     public function setSpouse($spouse)
     {
@@ -612,7 +653,7 @@ abstract class AbstractPerson implements PersonInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return mixed
      */
     public function getSpouse()
     {
@@ -620,7 +661,7 @@ abstract class AbstractPerson implements PersonInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param PersonInterface $person
      */
     public function addSpouse(PersonInterface $person)
     {
@@ -630,7 +671,9 @@ abstract class AbstractPerson implements PersonInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param $worksFor
+     *
+     * @return $this
      */
     public function setWorksFor($worksFor)
     {
@@ -640,7 +683,7 @@ abstract class AbstractPerson implements PersonInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return mixed
      */
     public function getWorksFor()
     {
@@ -657,8 +700,6 @@ abstract class AbstractPerson implements PersonInterface
         }
     }
 
-
-    
     /**
      *
      */

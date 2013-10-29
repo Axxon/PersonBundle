@@ -8,6 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Black\Bundle\PersonBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
@@ -33,7 +34,7 @@ class ContactType extends AbstractType
         $builder
             ->add('value', 'textarea', array(
                     'label' => ' ',
-                    "attr"  => array(
+                    'attr'  => array(
                         "rows" => 5
                     )
                 )

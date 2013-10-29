@@ -4,10 +4,9 @@
 {% endblock %}
 {% block page_content %}
     <div class="fluid">
-        <form id="validate" class="main grid9" action="{{ path(admin_new) }}"  method="post" {{ form_enctype(form) }}>
+        <form id="validate" class="main" action="{{ path(admin_new) }}"  method="post" {{ form_enctype(form) }}>
             {% include 'BlackAdminBundle:AdminForm:fieldset.html.twig' with {'form': form, 'title': "person.admin.fieldset.person.new.text"} %}
         </form>
-        {% include 'BlackAdminBundle:AdminForm:actions.html.twig' %}
     </div>
     {% include 'BlackPersonBundle:AdminPerson:js.html.twig' with {'form': form} %}
 {% endblock %}

@@ -8,6 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Black\Bundle\PersonBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
@@ -88,7 +89,7 @@ class ContactPointType extends AbstractType
             array(
                 'data_class'            => $this->class,
                 'intention'             => 'contactpoint_form',
-                'translation_domaine'   => 'form'
+                'translation_domain'    => 'form'
             )
         );
     }

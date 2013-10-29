@@ -8,6 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Black\Bundle\PersonBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -18,7 +19,11 @@ use Black\Bundle\PersonBundle\Model\AbstractPerson;
 use Black\Bundle\CommonBundle\Traits\ThingEntityTrait;
 
 /**
- * Person Entity
+ * Class Person
+ *
+ * @package Black\Bundle\PersonBundle\Entity
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
  */
 abstract class Person extends AbstractPerson
 {
@@ -185,18 +190,21 @@ abstract class Person extends AbstractPerson
     }
 
     /**
-     * upload
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function preUpload()
+    {
+        parent::preUpload();
+    }
+
+    /**
+     * @ORM\PostPersist()
+     * @ORM\PostUpdate()
      */
     public function upload()
     {
-        if (null === $this->image) {
-            return;
-        }
-
-        $this->path = sha1(uniqid(mt_rand(), true)) . '.' . $this->image->guessExtension();
-        $this->image->move($this->getUploadRootDir(), $this->path);
-
-        unset($this->image);
+        parent::upload();
     }
 
     /**
@@ -204,15 +212,6 @@ abstract class Person extends AbstractPerson
      */
     public function removeUpload()
     {
-        if ($image = $this->getAbsolutePath()) {
-            unlink($image);
-        }
-    }
-
-    /**
-     * @ORM\PreRemove
-     */
-    public function onRemove()
-    {
+        parent::removeUpload();
     }
 }

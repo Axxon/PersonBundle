@@ -8,6 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Black\Bundle\PersonBundle\Form\Type;
 
 use Black\Bundle\CommonBundle\Form\Type\PostalAddressType as AbstractPostalAddressType;
@@ -21,6 +22,9 @@ use Black\Bundle\CommonBundle\Form\Type\PostalAddressType as AbstractPostalAddre
  */
 class PostalAddressType extends AbstractPostalAddressType
 {
+    /**
+     * @return string
+     */
     public function getName()
     {
         return 'black_person_postaladdress';

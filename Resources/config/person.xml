@@ -14,18 +14,21 @@
         <service id="black_person.person.form.type" class="%black_person.person.form.type%" scope="request">
             <argument>%black_person.db_driver%</argument>
             <argument>%black_person.person.model.class%</argument>
+            <argument type="service" id="black_admin.form.event.button" />
             <tag name="form.type" alias="black_person_person" />
         </service>
 
         <service id="black_person.person.form.handler" class="%black_person.person.form.handler%" scope="request" public="true">
             <argument type="service" id="black_person.person.form" />
+            <argument type="service" id="black_person.manager.person" />
             <argument type="service" id="request" />
+            <argument type="service" id="router" />
             <argument type="service" id="session" />
+            <argument type="service" id="security.context" />
         </service>
         
         <service id="black_person.person.model.class" class="%black_person.person.model.class%" public="true" />
 
-        
         <service id="black_person.person.form.gender_list" class="%black_person.person.form.gender_list%" public="false" />
         
         <service id="black_person.person.form.gender_type" class="Black\Bundle\CommonBundle\Form\Type\CustomChoiceListType" public="true">
@@ -33,7 +36,6 @@
             <argument>black_person_choice_list_gender</argument>
             <tag name="form.type" alias="black_person_choice_list_gender" />
         </service>
-
 
         <service id="black_person.person.form.honorific_prefix_list" class="%black_person.person.form.honorific_prefix_list%" public="false" />
         

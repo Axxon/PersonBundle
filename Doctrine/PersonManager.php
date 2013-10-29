@@ -8,6 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Black\Bundle\PersonBundle\Doctrine;
 
 use Black\Bundle\PersonBundle\Model\PersonManagerInterface;
@@ -16,7 +17,9 @@ use Doctrine\Common\Persistence\ObjectManager;
 /**
  * Class PersonManager
  *
- * @package Black\Bundle\PersonBundle\Person
+ * @package Black\Bundle\PersonBundle\Doctrine
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
  */
 class PersonManager implements PersonManagerInterface
 {
@@ -89,8 +92,6 @@ class PersonManager implements PersonManagerInterface
     }
 
     /**
-     * Remove the model
-     * 
      * @param object $model
      *
      * @throws \InvalidArgumentException
@@ -104,8 +105,6 @@ class PersonManager implements PersonManagerInterface
     }
 
     /**
-     * Save and Flush a new model
-     *
      * @param mixed $model
      */
     public function persistAndFlush($model)
@@ -126,9 +125,7 @@ class PersonManager implements PersonManagerInterface
     }
 
     /**
-     * Create a new model
-     *
-     * @return $config object
+     * @return mixed
      */
     public function createInstance()
     {

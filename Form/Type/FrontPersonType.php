@@ -8,6 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Black\Bundle\PersonBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
@@ -73,7 +74,8 @@ class FrontPersonType extends AbstractType
             )
             ->add('image', 'file', array(
                     'label'         => 'person.www.person.image.text',
-                    'required'      => false
+                    'required'      => false,
+                    'image_path'    => 'webPath'
                 )
             )
             ->add('email', 'email', array(
@@ -93,6 +95,13 @@ class FrontPersonType extends AbstractType
                         'rows'          => '10',
                         'class'         => 'span12',
                         'placeholder'   => 'person.www.person.description.placeholder'
+                    )
+                )
+            )
+            ->add('save', 'submit', array(
+                    'label'     => 'black.person.type.button.save.label',
+                    'attr'      => array(
+                        'class'     => 'btn btn-success pull-right m20'
                     )
                 )
             );

@@ -8,6 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Black\Bundle\PersonBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -20,15 +21,17 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 /**
- * Controller managing the person profile`
+ * Class AdminPersonController
  *
  * @Route("/admin/person")
+ *
+ * @package Black\Bundle\PersonBundle\Controller
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
  */
 class AdminPersonController extends Controller
 {
     /**
-     * Show lists of Persons
-     *
      * @Method("GET")
      * @Route("/index.html", name="admin_persons")
      * @Secure(roles="ROLE_ADMIN")
@@ -55,8 +58,6 @@ class AdminPersonController extends Controller
     }
 
     /**
-     * Show lists of Persons
-     *
      * @Method("GET")
      * @Route("/list.json", name="admin_persons_json")
      * @Secure(roles="ROLE_ADMIN")
@@ -91,8 +92,6 @@ class AdminPersonController extends Controller
     }
 
     /**
-     * Show a person
-     *
      * @param integer $id
      * 
      * @Method({"GET"})
@@ -115,19 +114,12 @@ class AdminPersonController extends Controller
             throw $this->createNotFoundException('Unable to find Person document.');
         }
 
-        $form = $this->createForm($this->get('black_person.contact.form.type'), array('id' => $id));
-        $locale = $this->getRequest()->getLocale();
-
         return array(
-            'document'      => $document,
-            'locale'        => $locale,
-            'form'          => $form->createView()
+            'document'      => $document
         );
     }
 
     /**
-     * Displays a form to create a new Person document.
-     *
      * @Method({"GET", "POST"})
      * @Route("/new", name="admin_person_new")
      * @Secure(roles="ROLE_ADMIN")
@@ -143,10 +135,7 @@ class AdminPersonController extends Controller
         $process        = $formHandler->process($document);
 
         if ($process) {
-            $documentManager->persist($document);
-            $documentManager->flush();
-
-            return $this->redirect($this->generateUrl('admin_person_edit', array('id' => $document->getId())));
+            return $this->redirect($this->generateUrl($formHandler->getUrl()));
         }
 
         return array(
@@ -156,8 +145,6 @@ class AdminPersonController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing Person document.
-     *
      * @param string $id The document ID
      * 
      * @Method({"GET", "POST"})
@@ -180,27 +167,20 @@ class AdminPersonController extends Controller
             throw $this->createNotFoundException('Unable to find Person.');
         }
 
-        $deleteForm     = $this->createDeleteForm($id);
-
         $formHandler    = $this->get('black_person.person.form.handler');
         $process        = $formHandler->process($person);
 
         if ($process) {
-            $manager->flush();
-
-            return $this->redirect($this->generateUrl('admin_person_edit', array('id' => $id)));
+            return $this->redirect($formHandler->getUrl());
         }
 
         return array(
             'document'      => $person,
-            'form'          => $formHandler->getForm()->createView(),
-            'delete_form'   => $deleteForm->createView()
+            'form'          => $formHandler->getForm()->createView()
         );
     }
 
     /**
-     * Deletes a Person document.
-     *
      * @param integer $id
      * @param string  $token
      * 
@@ -245,8 +225,6 @@ class AdminPersonController extends Controller
     }
 
     /**
-     * Deletes a Person document.
-     *
      * @Method({"POST"})
      * @Route("/batch", name="admin_person_batch")
      *
@@ -291,6 +269,11 @@ class AdminPersonController extends Controller
 
     }
 
+    /**
+     * @param $id
+     *
+     * @return \Symfony\Component\Form\Form
+     */
     protected function createDeleteForm($id)
     {
         $form = $this->createFormBuilder(array('id' => $id))
@@ -301,8 +284,6 @@ class AdminPersonController extends Controller
     }
 
     /**
-     * Returns the DocumentManager
-     *
      * @return DocumentManager
      */
     protected function getManager()

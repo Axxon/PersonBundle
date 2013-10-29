@@ -8,12 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Black\Bundle\PersonBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Black\Bundle\PersonBundle\Form\EventListener\SetPersonDataSubscriber;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Class PersonType
@@ -38,10 +40,11 @@ class PersonType extends AbstractType
      * @param string $dbDriver
      * @param string $class
      */
-    public function __construct($dbDriver, $class)
+    public function __construct($dbDriver, $class, EventSubscriberInterface $buttonSubscriber)
     {
-        $this->dbDriver     = $dbDriver;
-        $this->class        = $class;
+        $this->dbDriver             = $dbDriver;
+        $this->class                = $class;
+        $this->buttonSubscriber     = $buttonSubscriber;
     }
 
     /**
@@ -51,7 +54,9 @@ class PersonType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $subscriber = new SetPersonDataSubscriber($builder->getFormFactory(), $this->dbDriver, $this->class);
-        $builder->addEventSubscriber($subscriber);
+        $builder
+            ->addEventSubscriber($subscriber)
+            ->addEventSubscriber($this->buttonSubscriber);
 
         $builder
             ->add('gender', 'black_person_choice_list_gender', array(

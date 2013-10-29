@@ -8,6 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Black\Bundle\PersonBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
@@ -18,9 +19,13 @@ use Black\Bundle\CommonBundle\Traits\ThingDocumentTrait;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
- * Person Document
+ * Class Person
  *
  * @ODM\MappedSuperclass()
+ *
+ * @package Black\Bundle\PersonBundle\Document
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
  */
 class Person extends AbstractPerson
 {
@@ -155,11 +160,7 @@ class Person extends AbstractPerson
      */
     public function preUpload()
     {
-        if (null !== $this->getImage()) {
-
-            $filename   = sha1(uniqid(mt_rand(), true));
-            $this->path = $filename . '.' . $this->getImage()->guessExtension();
-        }
+        parent::preUpload();
     }
 
     /**
@@ -168,20 +169,7 @@ class Person extends AbstractPerson
      */
     public function upload()
     {
-        if (null === $this->getImage()) {
-            return;
-        }
-
-
-
-        $this->getImage()->move($this->getUploadRootDir(), $this->path);
-
-        if (isset($this->temp)) {
-            unlink($this->getUploadRootDir() . '/' . $this->temp);
-            $this->temp = null;
-        }
-
-        $this->image = null;
+        parent::upload();
     }
 
     /**
@@ -189,8 +177,6 @@ class Person extends AbstractPerson
      */
     public function removeUpload()
     {
-        if ($image = $this->getAbsolutePath()) {
-            unlink($image);
-        }
+        parent::removeUpload();
     }
 }

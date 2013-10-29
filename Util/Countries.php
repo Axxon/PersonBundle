@@ -1,6 +1,6 @@
 <?php
 /*
- * This file is part of the Blackperson package.
+ * This file is part of the Black package.
  *
  * (c) Alexandre Balmes <albalmes@gmail.com>
  *
@@ -10,8 +10,18 @@
 
 namespace Black\Bundle\PersonBundle\Util;
 
+/**
+ * Class Countries
+ *
+ * @package Black\Bundle\PersonBundle\Util
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
+ */
 class Countries
 {
+    /**
+     * @return array
+     */
     public static function getEUCountries()
     {
         return array(

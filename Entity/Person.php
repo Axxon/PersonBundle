@@ -190,18 +190,21 @@ abstract class Person extends AbstractPerson
     }
 
     /**
-     * upload
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function preUpload()
+    {
+        parent::preUpload();
+    }
+
+    /**
+     * @ORM\PostPersist()
+     * @ORM\PostUpdate()
      */
     public function upload()
     {
-        if (null === $this->image) {
-            return;
-        }
-
-        $this->path = sha1(uniqid(mt_rand(), true)) . '.' . $this->image->guessExtension();
-        $this->image->move($this->getUploadRootDir(), $this->path);
-
-        unset($this->image);
+        parent::upload();
     }
 
     /**
@@ -209,15 +212,6 @@ abstract class Person extends AbstractPerson
      */
     public function removeUpload()
     {
-        if ($image = $this->getAbsolutePath()) {
-            unlink($image);
-        }
-    }
-
-    /**
-     * @ORM\PreRemove
-     */
-    public function onRemove()
-    {
+        parent::removeUpload();
     }
 }

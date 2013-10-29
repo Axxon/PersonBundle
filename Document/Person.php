@@ -160,11 +160,7 @@ class Person extends AbstractPerson
      */
     public function preUpload()
     {
-        if (null !== $this->getImage()) {
-
-            $filename   = sha1(uniqid(mt_rand(), true));
-            $this->path = $filename . '.' . $this->getImage()->guessExtension();
-        }
+        parent::preUpload();
     }
 
     /**
@@ -173,18 +169,7 @@ class Person extends AbstractPerson
      */
     public function upload()
     {
-        if (null === $this->getImage()) {
-            return;
-        }
-
-        $this->getImage()->move($this->getUploadRootDir(), $this->path);
-
-        if (isset($this->temp)) {
-            unlink($this->getUploadRootDir() . '/' . $this->temp);
-            $this->temp = null;
-        }
-
-        $this->image = null;
+        parent::upload();
     }
 
     /**
@@ -192,8 +177,6 @@ class Person extends AbstractPerson
      */
     public function removeUpload()
     {
-        if ($image = $this->getAbsolutePath()) {
-            unlink($image);
-        }
+        parent::removeUpload();
     }
 }

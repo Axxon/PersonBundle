@@ -42,7 +42,6 @@ class PersonController extends Controller
         $person = $user->getPerson();
         $new    = false;
 
-        $userManager    = $this->getUserManager();
         $personManager  = $this->getPersonManager();
 
         if (!is_object($person) || !$person instanceof PersonInterface) {
@@ -55,17 +54,7 @@ class PersonController extends Controller
         $process        = $formHandler->process($person);
 
         if ($process) {
-
-            if (true === $new) {
-                $personManager->persist($person);
-                $user->setPerson($person);
-                $userManager->persist($user);
-            } else {
-                $personManager->flush();
-            }
-
-
-            $userManager->flush();
+            return $this->redirect($formHandler->getUrl());
         }
 
         return array(
@@ -80,13 +69,5 @@ class PersonController extends Controller
     protected function getPersonManager()
     {
         return $this->get('black_person.manager.person');
-    }
-
-    /**
-     * @return DocumentManager
-     */
-    protected function getUserManager()
-    {
-        return $this->get('black_user.manager.user');
     }
 }

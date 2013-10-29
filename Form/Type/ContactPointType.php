@@ -89,7 +89,7 @@ class ContactPointType extends AbstractType
             array(
                 'data_class'            => $this->class,
                 'intention'             => 'contactpoint_form',
-                'translation_domaine'   => 'form'
+                'translation_domain'    => 'form'
             )
         );
     }

@@ -95,8 +95,15 @@ abstract class AbstractPerson implements PersonInterface
 
     /**
      * @var
+     *
+     * @Assert\File(maxSize="6000000")
      */
     protected $image;
+
+    /**
+     * @var
+     */
+    protected $temp;
 
     /**
      * @var
@@ -132,11 +139,6 @@ abstract class AbstractPerson implements PersonInterface
      * @var
      */
     protected $worksFor;
-
-    /**
-     * @var
-     */
-    protected $temp;
 
     /**
      *
@@ -433,6 +435,13 @@ abstract class AbstractPerson implements PersonInterface
     {
         $this->image = $image;
 
+        if (isset($this->path)) {
+            $this->temp = $this->path;
+            $this->path = null;
+        } else {
+            $this->path = 'initial';
+        }
+
         return $this;
     }
 
@@ -703,15 +712,40 @@ abstract class AbstractPerson implements PersonInterface
     /**
      *
      */
+    public function preUpload()
+    {
+        if (null !== $this->image) {
+            $this->path = sha1(uniqid(mt_rand(), true)) . '.' . $this->image->guessExtension();
+        }
+    }
+
+    /**
+     *
+     */
     public function upload()
     {
-        if (null == $this->image) {
+        if (null === $this->image) {
             return;
         }
 
-        $this->image->move($this->getUploadRootDir(), $this->image->getClientOriginalName());
-        $this->path = $this->image->getClientOriginalName();
+        $this->getImage()->move($this->getUploadRootDir(), $this->path);
+
+        if (isset($this->temp)) {
+            unlink($this->getUploadRootDir() . '/' . $this->temp);
+            $this->temp = null;
+        }
+
         $this->image = null;
+    }
+
+    /**
+     *
+     */
+    public function removeUpload()
+    {
+        if ($image = $this->getAbsolutePath()) {
+            unlink($image);
+        }
     }
 
     /**
@@ -719,7 +753,7 @@ abstract class AbstractPerson implements PersonInterface
      */
     public function getAbsolutePath()
     {
-        return null === $this->path ? null : $this->getUploadRootDir().'/'.$this->path;
+        return null === $this->path ? null : $this->getUploadRootDir() . '/' . $this->path;
     }
 
     /**
@@ -727,7 +761,7 @@ abstract class AbstractPerson implements PersonInterface
      */
     public function getWebPath()
     {
-        return null === $this->path ? null : $this->getUploadDir().'/'.$this->path;
+        return null === $this->path ? null : $this->getUploadDir() . '/' . $this->path;
     }
 
     /**
@@ -735,7 +769,7 @@ abstract class AbstractPerson implements PersonInterface
      */
     protected function getUploadRootDir()
     {
-        return __DIR__ . '/../../../../../web/' . $this->getUploadDir();
+        return __DIR__ . '/../../../../../../../web/' . $this->getUploadDir();
     }
 
     /**
@@ -744,12 +778,5 @@ abstract class AbstractPerson implements PersonInterface
     protected function getUploadDir()
     {
         return 'uploads/profile';
-    }
-
-    /**
-     *
-     */
-    public function onRemove()
-    {
     }
 }

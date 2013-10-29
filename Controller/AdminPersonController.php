@@ -114,13 +114,8 @@ class AdminPersonController extends Controller
             throw $this->createNotFoundException('Unable to find Person document.');
         }
 
-        $form = $this->createForm($this->get('black_person.contact.form.type'), array('id' => $id));
-        $locale = $this->getRequest()->getLocale();
-
         return array(
-            'document'      => $document,
-            'locale'        => $locale,
-            'form'          => $form->createView()
+            'document'      => $document
         );
     }
 
@@ -140,10 +135,7 @@ class AdminPersonController extends Controller
         $process        = $formHandler->process($document);
 
         if ($process) {
-            $documentManager->persist($document);
-            $documentManager->flush();
-
-            return $this->redirect($this->generateUrl('admin_person_edit', array('id' => $document->getId())));
+            return $this->redirect($this->generateUrl($formHandler->getUrl()));
         }
 
         return array(
@@ -175,21 +167,16 @@ class AdminPersonController extends Controller
             throw $this->createNotFoundException('Unable to find Person.');
         }
 
-        $deleteForm     = $this->createDeleteForm($id);
-
         $formHandler    = $this->get('black_person.person.form.handler');
         $process        = $formHandler->process($person);
 
         if ($process) {
-            $manager->flush();
-
-            return $this->redirect($this->generateUrl('admin_person_edit', array('id' => $id)));
+            return $this->redirect($formHandler->getUrl());
         }
 
         return array(
             'document'      => $person,
-            'form'          => $formHandler->getForm()->createView(),
-            'delete_form'   => $deleteForm->createView()
+            'form'          => $formHandler->getForm()->createView()
         );
     }
 

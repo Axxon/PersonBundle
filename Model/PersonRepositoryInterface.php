@@ -12,7 +12,7 @@
 namespace Black\Bundle\PersonBundle\Model;
 
 /**
- * Class PersonRepositoryInterface
+ * Interface PersonRepositoryInterface
  *
  * @package Black\Bundle\PersonBundle\Model
  * @author  Alexandre Balmes <albalmes@gmail.com>
@@ -20,4 +20,57 @@ namespace Black\Bundle\PersonBundle\Model;
  */
 interface PersonRepositoryInterface
 {
+    /**
+     * @param $limit
+     *
+     * @return mixed
+     */
+    function getLastPersons($limit);
+
+    /**
+     * @param $slug
+     *
+     * @return mixed
+     */
+    function getPersonBySlug($slug);
+
+    /**
+     * @param $id
+     *
+     * @return mixed
+     */
+    function getPersonById($id);
+
+    /**
+     * @param array $ids
+     *
+     * @return mixed
+     */
+    function getPersonsByIds(array $ids);
+
+    /**
+     * @param array $ids
+     *
+     * @return mixed
+     */
+    function getPersonsByCountries(array $ids);
+
+    /**
+     * @param $person
+     *
+     * @return mixed
+     */
+    function getAllExcept($person);
+
+    /**
+     * @return mixed
+     */
+    function getAll();
+
+    /**
+     * @param $text
+     *
+     * @return mixed
+     */
+    function searchPerson($text);
 }

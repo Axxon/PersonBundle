@@ -18,8 +18,12 @@
 
         <service id="black_person.person.form.front_handler" class="%black_person.person.form.front_handler%" scope="request" public="true">
             <argument type="service" id="black_person.person.form.front" />
+            <argument type="service" id="black_person.manager.person" />
+            <argument type="service" id="black_user.manager.user" />
             <argument type="service" id="request" />
+            <argument type="service" id="router" />
             <argument type="service" id="session" />
+            <argument type="service" id="security.context" />
         </service>
     </services>
 </container>

@@ -14,12 +14,19 @@ namespace Black\Bundle\PersonBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 use Black\Bundle\PersonBundle\Model\AbstractPerson;
 use Black\Bundle\CommonBundle\Traits\ThingEntityTrait;
 
 /**
  * Class Person
+ *
+ * @ORM\MappedSuperClass
+ * @ORM\Table(name="person",indexes={
+ *          @ORM\Index(name="name_idx", columns={"name"})
+ *      })
+ * @UniqueEntity("email")
  *
  * @package Black\Bundle\PersonBundle\Entity
  * @author  Alexandre Balmes <albalmes@gmail.com>

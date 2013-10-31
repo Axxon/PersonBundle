@@ -140,11 +140,6 @@ class Person extends AbstractPerson
     protected $worksFor;
 
     /**
-     * @var
-     */
-    protected $filenameForRemove;
-
-    /**
      * @param $name
      */
     public function setName($name)

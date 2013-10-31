@@ -111,7 +111,6 @@ class FrontPersonFormHandler
             $person->setName(null);
 
             if ($this->form->isValid()) {
-
                 return $this->onSave($person);
             } else {
                 return $this->onFailed();
@@ -153,9 +152,9 @@ class FrontPersonFormHandler
         $user = $this->getUser();
 
         if (!$person->getId()) {
-            $personManager->persist($person);
+            $this->personManager->persist($person);
             $user->setPerson($person);
-            $userManager->persist($user);
+            $this->userManager->persist($user);
         }
 
         $this->personManager->flush();

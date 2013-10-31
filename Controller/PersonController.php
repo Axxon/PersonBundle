@@ -39,6 +39,22 @@ class PersonController extends Controller
     public function meAction()
     {
         $user   = $this->getUser();
+
+        return array(
+            'person'    => $user->getPerson()
+        );
+    }
+
+    /**
+     * @Route("/me/edit.html", name="person_me_edit")
+     * @Secure(roles="ROLE_USER")
+     * @Template()
+     *
+     * @return array
+     */
+    public function meEditAction()
+    {
+        $user   = $this->getUser();
         $person = $user->getPerson();
         $new    = false;
 

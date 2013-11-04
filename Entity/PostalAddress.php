@@ -11,7 +11,11 @@
 
 namespace Black\Bundle\PersonBundle\Entity;
 
-use Black\Bundle\CommonBundle\Entity\PostalAddress as AbstractPostalAddress;
+use Black\Bundle\CommonBundle\Traits\ContactPointEntityTrait;
+use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
+use Black\Bundle\CommonBundle\Traits\PostalAddressEntityTrait;
 
 /**
  * Class PostalAddress
@@ -20,6 +24,7 @@ use Black\Bundle\CommonBundle\Entity\PostalAddress as AbstractPostalAddress;
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-abstract class PostalAddress extends AbstractPostalAddress
+class PostalAddress
 {
+    use PostalAddressEntityTrait;
 }

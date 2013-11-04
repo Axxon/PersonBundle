@@ -49,7 +49,7 @@
             <argument type="service" id="black_person.manager.person" />
         </service>
         
-        <service id="black_person.person.form.person_double_box_type" class="Black\Bundle\CommonBundle\Form\Type\CustomDoubleBoxType" public="true">
+        <service id="black_person.person.form.person_double_box_type" class="Black\Bundle\AdminBundle\Form\Type\CustomDoubleBoxType" public="true">
             <argument type="service" id="black_person.person.form.person_list" />
             <argument>black_person_double_box_person</argument>
             <tag name="form.type" alias="black_person_double_box_person" />

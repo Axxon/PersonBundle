@@ -161,7 +161,7 @@ class FrontPersonFormHandler
 
         if ($this->form->get('save')->isClicked()) {
             $this->setFlash('success', 'success.person.www.person.edit');
-            $this->setUrl($this->generateUrl('person_me'));
+            $this->setUrl($this->generateUrl('person_me_edit'));
 
             return true;
         }

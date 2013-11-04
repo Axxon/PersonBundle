@@ -55,7 +55,6 @@ class PersonType extends AbstractType
     {
         $subscriber = new SetPersonDataSubscriber($builder->getFormFactory(), $this->dbDriver, $this->class);
         $builder
-            ->addEventSubscriber($subscriber)
             ->addEventSubscriber($this->buttonSubscriber);
 
         $builder
@@ -142,34 +141,6 @@ class PersonType extends AbstractType
             )
             ->add('worksFor', 'text', array(
                     'label'         => 'person.admin.person.works.text',
-                    'required'      => false
-                )
-            )
-            ->add('children', 'black_person_double_box_person', array(
-                    'label'         => 'person.admin.person.children.text',
-                    'multiple'      => true,
-                    'by_reference'  => false,
-                    'required'      => false
-                )
-            )
-            ->add('parents', 'black_person_double_box_person', array(
-                    'label'         => 'person.admin.person.parent.text',
-                    'multiple'      => true,
-                    'by_reference'  => false,
-                    'required'      => false
-                )
-            )
-            ->add('colleagues', 'black_person_double_box_person', array(
-                    'label'         => 'person.admin.person.colleagues.text',
-                    'multiple'      => true,
-                    'by_reference'  => false,
-                    'required'      => false
-                )
-            )
-            ->add('siblings', 'black_person_double_box_person', array(
-                    'label'         => 'person.admin.person.siblings.text',
-                    'multiple'      => true,
-                    'by_reference'  => false,
                     'required'      => false
                 )
             )

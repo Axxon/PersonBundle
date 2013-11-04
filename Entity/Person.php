@@ -11,6 +11,7 @@
 
 namespace Black\Bundle\PersonBundle\Entity;
 
+use Black\Bundle\CommonBundle\Traits\ImageEntityTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -23,6 +24,7 @@ use Black\Bundle\CommonBundle\Traits\ThingEntityTrait;
  * Class Person
  *
  * @ORM\MappedSuperClass
+ * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="person",indexes={
  *          @ORM\Index(name="name_idx", columns={"name"})
  *      })
@@ -35,6 +37,7 @@ use Black\Bundle\CommonBundle\Traits\ThingEntityTrait;
 abstract class Person extends AbstractPerson
 {
     use ThingEntityTrait;
+    use ImageEntityTrait;
 
     /**
      * @ORM\Column(name="additional_name", type="string", nullable=true)
@@ -124,21 +127,10 @@ abstract class Person extends AbstractPerson
     protected $honorificSuffix;
 
     /**
-     * @ORM\Column(name="image", type="blob", nullable=true)
-     * @Assert\Image(maxSize="2M")
-     */
-    protected $image;
-
-    /**
      * @ORM\Column(name="job_title", type="string", nullable=true)
      * @Assert\Type(type="string")
      */
     protected $jobTitle;
-
-    /**
-     * @ORM\Column(name="path", type="string", nullable=true)
-     */
-    protected $path;
 
     /**
      * @ORM\Column(name="seeks", type="string", nullable=true)
@@ -194,31 +186,5 @@ abstract class Person extends AbstractPerson
         if (null === $name) {
             $this->name = $this->getGivenName() . ' ' . $this->getFamilyName();
         }
-    }
-
-    /**
-     * @ORM\PrePersist()
-     * @ORM\PreUpdate()
-     */
-    public function preUpload()
-    {
-        parent::preUpload();
-    }
-
-    /**
-     * @ORM\PostPersist()
-     * @ORM\PostUpdate()
-     */
-    public function upload()
-    {
-        parent::upload();
-    }
-
-    /**
-     * @ORM\PostRemove()
-     */
-    public function removeUpload()
-    {
-        parent::removeUpload();
     }
 }

@@ -11,8 +11,11 @@
 
 namespace Black\Bundle\PersonBundle\Document;
 
+use Black\Bundle\CommonBundle\Traits\PostalAddressDocumentTrait;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
+use Symfony\Component\Validator\Constraints as Assert;
 use Black\Bundle\CommonBundle\Document\PostalAddress as AbstractPostalAddress;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Class PostalAddress
@@ -23,6 +26,7 @@ use Black\Bundle\CommonBundle\Document\PostalAddress as AbstractPostalAddress;
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-class PostalAddress extends AbstractPostalAddress
+class PostalAddress
 {
+    use PostalAddressDocumentTrait;
 }

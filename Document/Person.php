@@ -11,12 +11,12 @@
 
 namespace Black\Bundle\PersonBundle\Document;
 
+use Black\Bundle\CommonBundle\Traits\ImageDocumentTrait;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Black\Bundle\PersonBundle\Model\AbstractPerson;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Black\Bundle\CommonBundle\Traits\ThingDocumentTrait;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Black\Bundle\PersonBundle\Model\AbstractPerson;
 
 /**
  * Class Person
@@ -30,6 +30,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 class Person extends AbstractPerson
 {
     use ThingDocumentTrait;
+    use ImageDocumentTrait;
 
     /**
      * @ODM\String
@@ -46,16 +47,6 @@ class Person extends AbstractPerson
      * @ODM\Date
      */
     protected $birthDate;
-
-    /**
-     * @ODM\ReferenceMany(targetDocument="Person", mappedBy="parents", cascade={"persist", "remove"})
-     */
-    protected $children;
-
-    /**
-     * @ODM\ReferenceMany(targetDocument="Person", cascade={"persist", "remove"})
-     */
-    protected $colleagues;
 
     /**
      * @ODM\EmbedMany(targetDocument="Black\Bundle\PersonBundle\Document\ContactPoint")
@@ -99,40 +90,15 @@ class Person extends AbstractPerson
     protected $honorificSuffix;
 
     /**
-     * @Assert\Image(maxSize="2M")
-     */
-    protected $image;
-
-    /**
      * @ODM\String
      * @Assert\Type(type="string")
      */
     protected $jobTitle;
 
     /**
-     * @ODM\String
-     */
-    protected $path;
-
-    /**
-     * @ODM\ReferenceMany(targetDocument="Person", inversedBy="children", cascade={"persist", "remove"})
-     */
-    protected $parents;
-
-    /**
      * @ODM\Field
      */
     protected $seeks;
-
-    /**
-     * @ODM\ReferenceMany(targetDocument="Person", cascade={"persist", "remove"})
-     */
-    protected $siblings;
-
-    /**
-     * @ODM\ReferenceOne(targetDocument="Person", cascade={"persist", "remove"})
-     */
-    protected $spouse;
 
     /**
      * @ODM\Field
@@ -147,31 +113,5 @@ class Person extends AbstractPerson
         if (null === $name) {
             $this->name = $this->getGivenName() . ' ' . $this->getFamilyName();
         }
-    }
-
-    /**
-     * @ODM\PrePersist()
-     * @ODM\PreUpdate()
-     */
-    public function preUpload()
-    {
-        parent::preUpload();
-    }
-
-    /**
-     * @ODM\PostPersist()
-     * @ODM\PostUpdate()
-     */
-    public function upload()
-    {
-        parent::upload();
-    }
-
-    /**
-     * @ODM\PostRemove()
-     */
-    public function removeUpload()
-    {
-        parent::removeUpload();
     }
 }

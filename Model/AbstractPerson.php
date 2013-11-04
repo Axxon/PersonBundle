@@ -13,7 +13,6 @@ namespace Black\Bundle\PersonBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Class AbstractPerson
@@ -95,25 +94,8 @@ abstract class AbstractPerson implements PersonInterface
 
     /**
      * @var
-     *
-     * @Assert\File(maxSize="6000000")
-     */
-    protected $image;
-
-    /**
-     * @var
-     */
-    protected $temp;
-
-    /**
-     * @var
      */
     protected $jobTitle;
-
-    /**
-     * @var
-     */
-    protected $path;
 
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
@@ -427,33 +409,6 @@ abstract class AbstractPerson implements PersonInterface
     }
 
     /**
-     * @param UploadedFile $image
-     *
-     * @return $this
-     */
-    public function setImage(UploadedFile $image = null)
-    {
-        $this->image = $image;
-
-        if (isset($this->path)) {
-            $this->temp = $this->path;
-            $this->path = null;
-        } else {
-            $this->path = 'initial';
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    /**
      * @param $jobTitle
      *
      * @return $this
@@ -503,26 +458,6 @@ abstract class AbstractPerson implements PersonInterface
     public function getChildren()
     {
         return $this->children;
-    }
-
-    /**
-     * @param $path
-     *
-     * @return $this
-     */
-    public function setPath($path)
-    {
-        $this->path = $path;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPath()
-    {
-        return $this->path;
     }
 
     /**
@@ -707,69 +642,6 @@ abstract class AbstractPerson implements PersonInterface
         if ($this->getAddress()->first()) {
             return $this->getAddress()->first()->getAddress();
         }
-    }
-
-    /**
-     *
-     */
-    public function preUpload()
-    {
-        if (null !== $this->image) {
-            $this->path = sha1(uniqid(mt_rand(), true)) . '.' . $this->image->guessExtension();
-        }
-    }
-
-    /**
-     *
-     */
-    public function upload()
-    {
-        if (null === $this->image) {
-            return;
-        }
-
-        $this->getImage()->move($this->getUploadRootDir(), $this->path);
-
-        if (isset($this->temp)) {
-            unlink($this->getUploadRootDir() . '/' . $this->temp);
-            $this->temp = null;
-        }
-
-        $this->image = null;
-    }
-
-    /**
-     *
-     */
-    public function removeUpload()
-    {
-        if ($image = $this->getAbsolutePath()) {
-            unlink($image);
-        }
-    }
-
-    /**
-     * @return null|string
-     */
-    public function getAbsolutePath()
-    {
-        return null === $this->path ? null : $this->getUploadRootDir() . '/' . $this->path;
-    }
-
-    /**
-     * @return null|string
-     */
-    public function getWebPath()
-    {
-        return null === $this->path ? null : $this->getUploadDir() . '/' . $this->path;
-    }
-
-    /**
-     * @return string
-     */
-    protected function getUploadRootDir()
-    {
-        return __DIR__ . '/../../../../../../../web/' . $this->getUploadDir();
     }
 
     /**
